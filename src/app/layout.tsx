@@ -1,32 +1,69 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// Switch from Google Geist to local HubotSans/PolySans per user's provided fonts
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const hubotSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/HubotSans-VariableFont_wdth,wght.ttf",
+      weight: "100 900",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/HubotSans-Italic-VariableFont_wdth,wght.ttf",
+      weight: "100 900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const polySans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/polysanstrial-neutral.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/polysansitalictrial-neutralitalic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-display",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "JYM Fitness - Professional Fitness App",
-  description: "A modern, scalable fitness application with 800+ exercises, nutrition tracking, and personalized workout plans. Built with React Native and Expo.",
-  keywords: ["fitness", "workout", "exercise", "health", "mobile app", "React Native", "Expo", "JYM Fitness"],
+  description:
+    "A modern, scalable fitness application with 800+ exercises, nutrition tracking, and personalized workout plans. Built with React Native and Expo.",
+  keywords: [
+    "fitness",
+    "workout",
+    "exercise",
+    "health",
+    "mobile app",
+    "React Native",
+    "Expo",
+    "JYM Fitness",
+  ],
   authors: [{ name: "JYM Fitness Team" }],
   openGraph: {
     title: "JYM Fitness - Professional Fitness App",
-    description: "Transform your fitness journey with 800+ exercises, nutrition tracking, and personalized workout plans.",
+    description:
+      "Transform your fitness journey with 800+ exercises, nutrition tracking, and personalized workout plans.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "JYM Fitness - Professional Fitness App",
-    description: "Transform your fitness journey with 800+ exercises, nutrition tracking, and personalized workout plans.",
+    description:
+      "Transform your fitness journey with 800+ exercises, nutrition tracking, and personalized workout plans.",
   },
 };
 
@@ -38,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${hubotSans.variable} ${polySans.variable} antialiased dark`}
       >
         {children}
       </body>

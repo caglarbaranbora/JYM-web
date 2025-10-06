@@ -5,6 +5,7 @@ type HeroProps = {
   leftTitle?: string;
   primaryMockupSrc?: string;
   secondaryMockupSrc?: string;
+  thirdMockupSrc?: string;
 };
 
 export default function Hero({
@@ -12,6 +13,7 @@ export default function Hero({
   // point to provided public images
   primaryMockupSrc = "/4.png",
   secondaryMockupSrc = "/5.png",
+  thirdMockupSrc = "/9.png",
 }: HeroProps) {
   const [line1, line2] = leftTitle.split("\n");
   return (
@@ -44,7 +46,7 @@ export default function Hero({
           </div>
           <div>
             <Image
-              src={secondaryMockupSrc}
+              src={thirdMockupSrc}
               alt="mockup1"
               width={400}
               height={800}

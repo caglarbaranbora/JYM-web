@@ -15,7 +15,7 @@ import {
 } from "@/components/landing/Sections";
 import Pricing from "@/components/landing/Pricing";
 
-export default function FitGuideLanding() {
+export default function RootPage() {
   return (
     <div className="min-h-screen md:py-8 md:px-4 bg-black text-foreground">
       <div className="max-w-8xl mx-auto">

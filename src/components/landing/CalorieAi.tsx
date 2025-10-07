@@ -82,30 +82,30 @@ export default function CalorieAi() {
           xmlns="http://www.w3.org/2000/svg"
         >
           {" "}
-          <g clipPath="url(#clip0_133_21)">
+          <g clipPath="url(#clip0_105_315)">
             {" "}
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M99.9759 100C44.7585 99.987 -2.80187e-06 55.2204 -7.62939e-06 1.74846e-05L200 0C200 55.2204 155.242 99.987 100.024 100C155.242 100.013 200 144.78 200 200H1.11288e-06C1.11288e-06 144.78 44.7585 100.013 99.9759 100Z"
-              fill="url(#paint0_linear_133_21)"
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M135.714 0H64.2857V64.2857H3.12224e-06L0 135.714H64.2857V200H135.714V135.714H200V64.2857H135.714V0Z"
+              fill="url(#paint0_linear_105_315)"
             />{" "}
           </g>{" "}
           <defs>
             {" "}
             <linearGradient
-              id="paint0_linear_133_21"
-              x1="157.5"
-              y1="32"
-              x2="44"
-              y2="147.5"
+              id="paint0_linear_105_315"
+              x1="177"
+              y1="-9.23648e-06"
+              x2="39.5"
+              y2="152.5"
               gradientUnits="userSpaceOnUse"
             >
               {" "}
-              <stop offset="0.0509862" stopColor="#e0e0e0" />{" "}
+              <stop stopColor="#e0e0e0" />{" "}
               <stop offset="1" stopColor="#303030" />{" "}
             </linearGradient>{" "}
-            <clipPath id="clip0_133_21">
+            <clipPath id="clip0_105_315">
               {" "}
               <rect width="200" height="200" fill="white" />{" "}
             </clipPath>{" "}

@@ -59,60 +59,6 @@ export function GetYourFit() {
   );
 }
 
-export function WorkoutSpace() {
-  return (
-    <div className="mb-8">
-      <div className="bg-black rounded-3xl p-8 md:p-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <h2 className="text-white text-4xl font-bold">Workout</h2>
-              <span className="text-yellow-400 text-4xl">✦</span>
-              <h2 className="text-white text-4xl font-bold">Space</h2>
-            </div>
-            <p className="text-gray-400 mb-6">
-              Choose between gym or home workouts—your space, your choice.
-            </p>
-            <button className="flex items-center gap-2 text-gray-400 hover:text-white cursor-pointer transition-all hover:scale-105">
-              <span>Get started now</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-900 rounded-2xl p-6 h-48">
-              <div className="text-white font-bold">INFORMATION</div>
-              <div className="text-gray-500 text-sm mt-2">Personal stats</div>
-            </div>
-            <div className="bg-gray-900 rounded-2xl p-6 h-48">
-              <div className="text-white font-bold">Watch Your Progress</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function Typeface() {
-  return (
-    <div className="bg-black rounded-3xl p-12 mb-8 text-center">
-      <h2 className="text-white text-4xl font-bold mb-4">Typeface</h2>
-      <p className="text-gray-400 mb-8">
-        This font embodies strength and clarity, perfectly aligning with the
-        fitness theme
-      </p>
-      <div className="flex justify-center gap-8">
-        <button className="bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-800 cursor-pointer transition-all hover:scale-105">
-          Aa | Satoshi
-        </button>
-        <button className="bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-800 cursor-pointer transition-all hover:scale-105">
-          Aa | Cabinet
-        </button>
-      </div>
-    </div>
-  );
-}
-
 export function Headlines() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -195,36 +141,6 @@ export function StatsGrid() {
   );
 }
 
-export function Palette() {
-  return (
-    <div className="bg-black rounded-3xl p-12 mb-8">
-      <div className="flex items-center gap-2 mb-8">
-        <h2 className="text-white text-4xl font-bold">Palette</h2>
-        <span className="text-white text-4xl">✦</span>
-        <h2 className="text-white text-4xl font-bold">Panorama</h2>
-      </div>
-      <p className="text-gray-400 mb-8">
-        A vibrant mix of bold purples, electric yellows, and deep
-        blacks—designed to energize and inspire every workout
-      </p>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gray-900 rounded-2xl p-6 h-32 flex items-center justify-center">
-          <span className="text-white">0, 0, 0</span>
-        </div>
-        <div className="bg-yellow-400 rounded-2xl p-6 h-32 flex items-center justify-center">
-          <span className="text-black">Yellow Pulse</span>
-        </div>
-        <div className="bg-gray-800 rounded-2xl p-6 h-32 flex items-center justify-center">
-          <span className="text-white">Dark Storm</span>
-        </div>
-        <div className="bg-indigo-600 rounded-2xl p-6 h-32 flex items-center justify-center">
-          <span className="text-white">Charcoal Black</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function TrackingSection() {
   return (
     <div className="bg-black rounded-3xl p-12 mb-8">
@@ -269,43 +185,6 @@ export function TrackingSection() {
             </div>
           </div>
         ))}
-      </div>
-    </div>
-  );
-}
-
-export function FinalCTA() {
-  return (
-    <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-12 mb-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-        <div className="md:col-span-2">
-          <div className="bg-black rounded-2xl p-6 mb-4">
-            <div className="text-white text-sm">GETTING YOUR BEST</div>
-            <div className="text-white text-sm">WORKOUT PLAN</div>
-          </div>
-          <div className="bg-black rounded-2xl p-6">
-            <div className="text-white">Tracking Your Goal</div>
-          </div>
-        </div>
-        <div className="bg-indigo-600 rounded-3xl p-8">
-          <div className="flex items-center gap-2 mb-6">
-            <h2 className="text-white text-4xl font-bold">Fit &</h2>
-            <span className="text-yellow-400 text-4xl">⚡</span>
-          </div>
-          <h2 className="text-white text-4xl font-bold mb-6">Fuelled</h2>
-          <p className="text-white mb-6 text-sm">
-            Empower your fitness with data-driven plans and real-time progress
-            tracking
-          </p>
-          <div className="flex gap-3">
-            <button className="bg-black text-white px-6 py-3 rounded-full text-sm hover:bg-gray-900 flex items-center gap-2 cursor-pointer transition-all hover:scale-105">
-              <span>All Workouts</span>
-            </button>
-            <button className="bg-yellow-400 text-black px-6 py-3 rounded-full text-sm hover:bg-yellow-500 flex items-center gap-2 cursor-pointer transition-all hover:scale-105">
-              <span>Get Started</span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

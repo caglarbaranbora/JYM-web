@@ -64,15 +64,16 @@ export default function AboutPage() {
               lack of personalized support.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              That's why we created JYM - a comprehensive fitness platform that
-              combines advanced AI technology with proven fitness methodologies.
-              Our mission is to make professional-grade fitness coaching
-              accessible to everyone, anywhere, at any time.
+              That&apos;s why we created JYM - a comprehensive fitness platform
+              that combines advanced AI technology with proven fitness
+              methodologies. Our mission is to make professional-grade fitness
+              coaching accessible to everyone, anywhere, at any time.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Whether you're a beginner taking your first steps into fitness or
-              an experienced athlete looking to optimize your performance, JYM
-              adapts to your unique needs, goals, and lifestyle.
+              Whether you&apos;re a beginner taking your first steps into
+              fitness or an experienced athlete looking to optimize your
+              performance, JYM adapts to your unique needs, goals, and
+              lifestyle.
             </p>
           </div>
         </div>
@@ -86,9 +87,9 @@ export default function AboutPage() {
             <h3 className="text-3xl font-black mb-4">Our Mission</h3>
             <p className="text-gray-300 text-lg leading-relaxed">
               To revolutionize fitness by providing intelligent, personalized
-              workout and nutrition solutions that adapt to each individual's
-              unique journey, making professional fitness guidance accessible to
-              everyone.
+              workout and nutrition solutions that adapt to each
+              individual&apos;s unique journey, making professional fitness
+              guidance accessible to everyone.
             </p>
           </div>
 
@@ -98,7 +99,7 @@ export default function AboutPage() {
             </div>
             <h3 className="text-3xl font-black mb-4">Our Vision</h3>
             <p className="text-gray-300 text-lg leading-relaxed">
-              To become the world's leading AI-powered fitness platform,
+              To become the world&apos;s leading AI-powered fitness platform,
               empowering millions to achieve their health and fitness goals
               through innovation, personalization, and unwavering support.
             </p>
@@ -128,7 +129,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Excellence</h3>
               <p className="text-gray-400">
-                We're committed to delivering the highest quality features
+                We&apos;re committed to delivering the highest quality features
                 backed by science and validated by results.
               </p>
             </div>

@@ -1,19 +1,12 @@
 import React from "react";
 import Hero from "@/components/landing/Hero";
 import Navigation from "@/components/landing/Navigation";
-import {
-  GetYourFit,
-  WorkoutSpace,
-  Typeface,
-  Headlines,
-  DreamSection,
-  StatsGrid,
-  Palette,
-  TrackingSection,
-  FinalCTA,
-  Footer,
-} from "@/components/landing/Sections";
+import GetYourFit from "@/components/landing/Sections";
 import Pricing from "@/components/landing/Pricing";
+import CalorieAi from "@/components/landing/CalorieAi";
+import Footer from "@/components/landing/Footer";
+import Stats from "@/components/landing/Stats";
+import Tracking from "@/components/landing/Tracking";
 
 export default function RootPage() {
   return (
@@ -22,15 +15,10 @@ export default function RootPage() {
         <Navigation />
         <Hero />
         <GetYourFit />
+        <CalorieAi />
         <Pricing />
-        <WorkoutSpace />
-        <Typeface />
-        <Headlines />
-        <DreamSection />
-        <StatsGrid />
-        <Palette />
-        <TrackingSection />
-        <FinalCTA />
+        <Stats />
+        <Tracking />
         <Footer />
       </div>
     </div>

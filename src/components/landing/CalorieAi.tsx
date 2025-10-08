@@ -116,7 +116,7 @@ export default function CalorieAi() {
         <h1 className="text-9xl font-black">
           Calorie <span className="text-accent">AI+</span>
         </h1>
-        <p className="flex text-xl max-w-3xl leading-relaxed">
+        <p className="flex text-xl max-w-4xl leading-relaxed  text-center">
           With AI-powered image analysis, simply upload a photo of your meal to
           instantly calculate its calories and macronutrients (protein, carbs,
           fat) — making healthy eating effortless.

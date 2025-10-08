@@ -59,10 +59,11 @@ export default function TermsOfUsePage() {
             </h2>
             <div className="text-gray-300 space-y-4">
               <p>
-                Welcome to JYM Fitness ("we," "our," or "us"). These Terms of
-                Use ("Terms") govern your access to and use of the JYM Fitness
-                mobile application, website, and related services (collectively,
-                the "Service").
+                Welcome to JYM Fitness (&quot;we,&quot; &quot;our,&quot; or
+                &quot;us&quot;). These Terms of Use (&quot;Terms&quot;) govern
+                your access to and use of the JYM Fitness mobile application,
+                website, and related services (collectively, the
+                &quot;Service&quot;).
               </p>
               <p>
                 By accessing or using our Service, you agree to be bound by
@@ -116,7 +117,7 @@ export default function TermsOfUsePage() {
                   laws
                 </li>
                 <li>
-                  Violate, infringe, or misappropriate other people's
+                  Violate, infringe, or misappropriate other people&apos;s
                   intellectual property or privacy rights
                 </li>
                 <li>
@@ -241,9 +242,9 @@ export default function TermsOfUsePage() {
                 Service Disclaimer
               </h3>
               <p>
-                THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND,
-                EITHER EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE
-                WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE.
+                THE SERVICE IS PROVIDED &quot;AS IS&quot; WITHOUT WARRANTIES OF
+                ANY KIND, EITHER EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE
+                SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE.
               </p>
 
               <h3 className="text-xl font-bold text-white mt-6">

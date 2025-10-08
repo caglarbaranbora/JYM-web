@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
-import { ArrowLeft, Send, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, Send, Mail } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -76,7 +75,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="text-xl font-bold mb-2">Email Us</h3>
                     <p className="text-gray-400 mb-2">
-                      We'll respond within 24 hours
+                      We&apos;ll respond within 24 hours
                     </p>
                     <a
                       href="mailto:contact.jymfitness@gmail.com"

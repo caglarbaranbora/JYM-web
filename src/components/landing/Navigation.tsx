@@ -49,10 +49,16 @@ export default function Navigation() {
         <Image src="/yellowLogo.png" alt="logo" width={70} height={70} />
       </div>
 
-      <button className="text-white text-md hover:text-gray-300">
-        My process
+      <button
+        className="text-white text-md hover:text-gray-300"
+        onClick={() => router.push("/about")}
+      >
+        About
       </button>
-      <button className=" text-white text-md hover:text-gray-300">
+      <button
+        className="text-white text-md hover:text-gray-300"
+        onClick={() => router.push("/contact")}
+      >
         Contact
       </button>
     </nav>

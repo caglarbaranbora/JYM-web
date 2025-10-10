@@ -44,48 +44,54 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="relative p-8 mb-4 overflow-hidden">
-      <h1 className="absolute left-8 text-white text-[400px] font-black leading-none opacity-40 select-none z-0 text-left">
+    <div className="relative p-4 sm:p-6 md:p-8 mb-4 overflow-hidden">
+      <h1 className="absolute left-2 sm:left-4 md:left-8 text-white text-[100px] sm:text-[150px] md:text-[200px] lg:text-[300px] xl:text-[400px] font-black leading-none opacity-40 select-none z-0 text-left">
         Pricing
       </h1>
-      {/* Kartlar */}
-      <div className="relative z-10 flex justify-end">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl">
+      {/* Kartlar - Responsive */}
+      <div className="relative z-10 flex justify-center lg:justify-end">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl w-full">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`rounded-3xl p-8 transition-all duration-300 hover:scale-105 cursor-pointer ${
+              className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:scale-105 cursor-pointer ${
                 plan.featured
-                  ? "bg-black border-2 border-[#e0fe10] relative"
+                  ? "bg-black border-2 border-[#e0fe10] relative md:col-span-2 lg:col-span-1"
                   : "bg-black border border-gray-800"
               }`}
             >
               {plan.featured && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#e0fe10] text-black px-6 py-1 rounded-full text-xs font-bold">
+                <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 bg-[#e0fe10] text-black px-4 sm:px-6 py-1 rounded-full text-xs font-bold">
                   MOST POPULAR
                 </div>
               )}
 
               <div className="mb-6">
-                <h3 className="text-gray-400 text-sm uppercase tracking-wide mb-2">
+                <h3 className="text-gray-400 text-xs sm:text-sm uppercase tracking-wide mb-2">
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-6xl font-black text-white">
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-black text-white">
                     {plan.price}
                   </span>
                   {plan.price !== "Free" && plan.name !== "Calorie AI+" && (
-                    <span className="text-gray-400 text-lg">/year</span>
+                    <span className="text-gray-400 text-base sm:text-lg">
+                      /year
+                    </span>
                   )}
                   {plan.name === "Calorie AI+" && (
-                    <span className="text-gray-400 text-lg">/month</span>
+                    <span className="text-gray-400 text-base sm:text-lg">
+                      /month
+                    </span>
                   )}
                 </div>
-                <p className="text-gray-300 text-sm">{plan.subtitle}</p>
+                <p className="text-gray-300 text-xs sm:text-sm">
+                  {plan.subtitle}
+                </p>
               </div>
 
               <button
-                className={`w-full py-4 rounded-full font-bold mb-8 transition-all hover:scale-105 ${
+                className={`w-full py-3 sm:py-4 rounded-full font-bold mb-6 sm:mb-8 transition-all hover:scale-105 text-sm sm:text-base ${
                   plan.featured
                     ? "bg-[#e0fe10] text-black"
                     : "bg-white text-black hover:bg-gray-200"
@@ -95,12 +101,14 @@ export default function Pricing() {
                 Get Started
               </button>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {plan.main && (
-                  <div className="text-gray-400 text-sm mb-2">{plan.main}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm mb-2">
+                    {plan.main}
+                  </div>
                 )}
                 {plan.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
+                  <div key={idx} className="flex items-start gap-2 sm:gap-3">
                     <div
                       className={`rounded-full p-1 flex-shrink-0 ${
                         plan.featured ? "bg-[#e0fe10]" : "bg-indigo-600"
@@ -109,7 +117,7 @@ export default function Pricing() {
                       <Check className="w-3 h-3 text-black" />
                     </div>
                     <span
-                      className={`text-sm ${
+                      className={`text-xs sm:text-sm ${
                         feature.includes("No Ads") ||
                         feature.includes("Calorie AI")
                           ? "text-[#e0fe10] font-semibold"
@@ -126,9 +134,9 @@ export default function Pricing() {
         </div>
       </div>
 
-      {/* Alt bilgi */}
-      <div className="mt-16 text-center relative z-10">
-        <p className="text-gray-500 text-sm">
+      {/* Alt bilgi - Responsive */}
+      <div className="mt-8 sm:mt-12 md:mt-16 text-center relative z-10 px-4">
+        <p className="text-gray-500 text-xs sm:text-sm">
           All plans include 7-day free trial • Cancel anytime • No hidden fees
         </p>
       </div>

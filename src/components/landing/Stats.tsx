@@ -1,27 +1,30 @@
 export default function Stats() {
   return (
-    <div className="bg-black p-8 relative">
-      <div className="text-center mb-8">
-        <h2 className="text-white text-8xl font-bold mb-4">
-          Dream <span className="text-9xl text-accent">Bigger</span>, Achieve
-          Beyond
+    <div className="bg-black p-4 sm:p-6 md:p-8 relative">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold mb-3 sm:mb-4">
+          Dream{" "}
+          <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl text-accent">
+            Bigger
+          </span>
+          , Achieve Beyond
         </h2>
-        <p className="text-gray-400 mx-auto text-3xl">
+        <p className="text-gray-400 mx-auto text-sm sm:text-base md:text-lg lg:text-xl xl:text-3xl px-4">
           Push past your limits and turn ambition into reality with every rep!
         </p>
       </div>
-      {/* Grid container */}
-      <div className="grid grid-rows-3 gap-4 mb-8 relative">
-        {/* 1. satır */}
-        <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 h-100 relative">
-          <div className="bg-[#222222] flex items-center justify-center rounded-[80px] text-6xl text-center p-16 font-semibold ">
+      {/* Grid container - Responsive */}
+      <div className="grid grid-rows-1 md:grid-rows-2 lg:grid-rows-3 gap-4 sm:gap-4 mb-6 sm:mb-8 relative">
+        {/* 1. satır - Mobile: stacked, Tablet: 2 cols, Desktop: 3 cols */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_2fr] gap-4 sm:gap-4 lg:h-[100px] xl:h-[400px] relative">
+          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center p-6 sm:p-8 md:p-12 lg:p-16 font-semibold min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             Nutrition Statistics
           </div>
-          <div className="bg-[#222222] flex items-center justify-center rounded-[80px] font-semibold text-6xl text-center p-16">
+          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             Fitness Goals
           </div>
-          <div className="flex items-center justify-center rounded-[80px] font-semibold">
-            <div className="flex items-center justify-center overflow-hidden">
+          <div className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+            <div className="flex items-center justify-center overflow-hidden scale-75 sm:scale-90 md:scale-100">
               <svg
                 width="250"
                 height="250"
@@ -137,9 +140,9 @@ export default function Stats() {
           </div>
         </div>
 
-        {/* 2. satır */}
-        <div className="grid grid-cols-[1fr_2fr_1fr] gap-4 h-100">
-          <div className=" flex items-center justify-center rounded-[80px] text-xl font-semibold">
+        {/* 2. satır - Responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_2fr_1fr] gap-3 sm:gap-4 lg:h-[100px] xl:h-[400px]">
+          <div className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-xl font-semibold order-2 sm:order-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             <svg
               width="300"
               height="300"
@@ -178,17 +181,18 @@ export default function Stats() {
               </defs>{" "}
             </svg>
           </div>
-          <div className="bg-[#222222] flex items-center justify-between rounded-[80px] text-8xl font-semibold p-16">
-            <div>
+          <div className="bg-[#222222] flex flex-col sm:flex-row items-center justify-between rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-semibold p-6 sm:p-8 md:p-12 lg:p-16 gap-4 order-1 sm:order-2 sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+            <div className="text-center sm:text-left">
               800+ <span className="text-accent">Exercises</span>
             </div>
-            <div>
+            <div className="flex-shrink-0">
               <svg
                 width="200"
                 height="200"
                 viewBox="0 0 200 200"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 xl:w-[200px] xl:h-[200px]"
               >
                 {" "}
                 <g clipPath="url(#clip0_231_793)">
@@ -222,28 +226,29 @@ export default function Stats() {
               </svg>
             </div>
           </div>
-          <div className="bg-[#222222] flex items-center justify-center rounded-[80px] font-semibold text-5xl text-center p-16">
+          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center p-6 sm:p-8 md:p-12 lg:p-16 order-3 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             <p>
               100+ Public <span className="text-[#e0fe10]">Workout</span> plan
             </p>
           </div>
         </div>
 
-        {/* 3. satır */}
-        <div className="grid grid-cols-[2fr_1fr_1fr] gap-4 h-100">
-          <div className="bg-[#222222] flex items-center justify-center rounded-[80px] text-center text-8xl font-semibold p-16">
+        {/* 3. satır - Responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-4 sm:gap-4 lg:h-[100px] xl:h-[400px]">
+          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-semibold p-6 sm:p-8 md:p-12 lg:p-16 sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             Calorie <span className="text-[#e0fe10]">AI+</span>
           </div>
-          <div className="bg-[#222222] flex items-center justify-center rounded-[80px] font-semibold text-5xl text-center p-16">
+          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             Day by day Analytics
           </div>
-          <div className=" flex items-center justify-center rounded-[80px] text-xl font-semibold">
+          <div className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-xl font-semibold min-h-[120px] sm:min-h-[150px] lg:min-h-0">
             <svg
               width="300"
               height="300"
               viewBox="0 0 200 200"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-[300px] xl:h-[300px]"
             >
               {" "}
               <path

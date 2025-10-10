@@ -2,8 +2,8 @@ import React from "react";
 
 export default function CalorieAi() {
   return (
-    <div className="p-8 relative">
-      <div className="-z-10 flex flex-row justify-between p-8 px-16 border-2 border-gray-800 rounded-[80px] mb-4 opacity-30 items-center overflow-hidden">
+    <div className="p-4 sm:p-6 md:p-8 relative">
+      <div className="-z-10 flex flex-row justify-between p-4 sm:p-6 md:p-8 px-6 sm:px-8 md:px-16 border-2 border-gray-800 rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] mb-4 opacity-30 items-center overflow-hidden">
         <svg
           width="400"
           height="400"
@@ -45,6 +45,7 @@ export default function CalorieAi() {
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-[400px] xl:h-[400px]"
         >
           {" "}
           <g clipPath="url(#clip0_116_153)">
@@ -80,6 +81,7 @@ export default function CalorieAi() {
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-[400px] xl:h-[400px]"
         >
           {" "}
           <g clipPath="url(#clip0_105_315)">
@@ -112,11 +114,11 @@ export default function CalorieAi() {
           </defs>{" "}
         </svg>
       </div>
-      <div className="flex flex-col items-center justify-center z-10 absolute inset-0 overflow-hidden">
-        <h1 className="text-9xl font-black">
+      <div className="flex flex-col items-center justify-center z-10 absolute inset-0 overflow-hidden px-4">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-black text-center">
           Calorie <span className="text-accent">AI+</span>
         </h1>
-        <p className="flex text-xl max-w-4xl leading-relaxed  text-center">
+        <p className="flex text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl leading-relaxed text-center mt-2 sm:mt-3 md:mt-4">
           With AI-powered image analysis, simply upload a photo of your meal to
           instantly calculate its calories and macronutrients (protein, carbs,
           fat) — making healthy eating effortless.

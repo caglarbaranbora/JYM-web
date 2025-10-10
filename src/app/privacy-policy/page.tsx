@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Shield, Eye, Lock, Database, Mail } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function PrivacyPolicy() {
   return (
@@ -29,209 +29,394 @@ export default function PrivacyPolicy() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <div className="bg-accent rounded-[80px] mx-4 md:mx-8 mt-8 p-12 md:p-16 text-center">
-        <div className="flex items-center justify-center mb-6">
-          <Shield className="h-16 w-16 text-[#e0fe10] mr-4" />
-          <h1 className="text-6xl md:text-8xl font-black">Privacy Policy</h1>
-        </div>
-        <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
-          Your privacy is important to us. This policy explains how we collect,
-          use, and protect your information.
+      {/* Header Section */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          Privacy Policy
+        </h1>
+        <p className="text-base text-gray-400 mb-2">
+          Your privacy is important to us. This Privacy Policy explains how JYM
+          Fitness collects, uses, and protects your personal information.
         </p>
-        <p className="text-sm text-white/70 mt-4">Last updated: January 2025</p>
+        <p className="text-sm text-gray-500">Last Updated: January 2025</p>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="space-y-8">
-          {/* Information We Collect */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Database className="h-8 w-8 text-[#e0fe10]" />
-              <h2 className="text-3xl font-black">Information We Collect</h2>
-            </div>
-            <div className="text-gray-300 space-y-4">
-              <div>
-                <h4 className="text-white font-semibold mb-2">
-                  Personal Information
-                </h4>
-                <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>Name and email address</li>
-                  <li>Profile information and preferences</li>
-                  <li>Fitness goals and assessment data</li>
-                  <li>Workout history and progress tracking</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-2">Usage Data</h4>
-                <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>App usage patterns and interactions</li>
-                  <li>Device information and operating system</li>
-                  <li>Performance metrics and crash reports</li>
-                  <li>Location data (if enabled)</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* How We Use Information */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Eye className="h-8 w-8 text-[#e0fe10]" />
-              <h2 className="text-3xl font-black">
-                How We Use Your Information
-              </h2>
-            </div>
-            <div className="text-gray-300 space-y-4">
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Provide personalized workout recommendations</li>
-                <li>Track your fitness progress and achievements</li>
-                <li>Improve app performance and user experience</li>
-                <li>Send important updates and notifications</li>
-                <li>Provide customer support and assistance</li>
-                <li>Analyze usage patterns to enhance features</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Data Protection */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Lock className="h-8 w-8 text-[#e0fe10]" />
-              <h2 className="text-3xl font-black">
-                Data Protection & Security
-              </h2>
-            </div>
-            <div className="text-gray-300 space-y-4">
-              <div>
-                <h4 className="text-white font-semibold mb-2">
-                  Security Measures
-                </h4>
-                <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>End-to-end encryption for sensitive data</li>
-                  <li>Secure cloud storage with AWS</li>
-                  <li>Regular security audits and updates</li>
-                  <li>Access controls and authentication</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-2">
-                  Data Retention
-                </h4>
-                <p className="ml-4">
-                  We retain your data only as long as necessary to provide our
-                  services. You can request data deletion at any time through
-                  our account deletion process.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Third-Party Services */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <h2 className="text-3xl font-black mb-6 text-[#e0fe10]">
-              Third-Party Services
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="prose prose-invert max-w-none">
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              1. Information We Collect
             </h2>
-            <div className="text-gray-300 space-y-4">
-              <p>
-                We use the following third-party services to provide our app
-                functionality:
-              </p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>
-                  <strong>AWS CloudFront:</strong> Content delivery and data
-                  storage
-                </li>
-                <li>
-                  <strong>Firebase:</strong> Backend services and authentication
-                </li>
-                <li>
-                  <strong>Clerk:</strong> User authentication and management
-                </li>
-                <li>
-                  <strong>Analytics:</strong> App usage and performance
-                  monitoring
-                </li>
-              </ul>
-              <p className="text-sm text-gray-400 mt-4">
-                These services have their own privacy policies and data handling
-                practices.
-              </p>
-            </div>
-          </div>
 
-          {/* Your Rights */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <h2 className="text-3xl font-black mb-6 text-[#e0fe10]">
-              Your Rights
+            <h3 className="text-xl font-semibold text-white mb-4">
+              1.1 Information You Provide
+            </h3>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              When you create an account and use JYM Fitness, we collect
+              information that you voluntarily provide to us, including:
+            </p>
+            <ul className="list-disc list-inside text-base text-gray-300 space-y-2 mb-6 ml-4">
+              <li>Name and email address</li>
+              <li>Profile information (age, gender, height, weight)</li>
+              <li>Fitness goals and preferences</li>
+              <li>Workout history and exercise data</li>
+              <li>Nutrition logs and calorie tracking data</li>
+              <li>Photos uploaded for AI calorie analysis</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-white mb-4">
+              1.2 Automatically Collected Information
+            </h3>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              When you use our application, we automatically collect certain
+              information about your device and usage patterns:
+            </p>
+            <ul className="list-disc list-inside text-base text-gray-300 space-y-2 mb-6 ml-4">
+              <li>
+                Device information (model, operating system, unique device
+                identifiers)
+              </li>
+              <li>App usage data and interaction patterns</li>
+              <li>Performance data and crash reports</li>
+              <li>IP address and approximate geographic location</li>
+              <li>Log files and diagnostic data</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-white mb-4">
+              1.3 Health and Fitness Data
+            </h3>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              With your permission, we may access and process health and fitness
+              data from your device&apos;s health apps (such as Apple Health or
+              Google Fit), including step counts, heart rate, and other activity
+              metrics.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              2. How We Use Your Information
             </h2>
-            <div className="text-gray-300 space-y-4">
-              <p>You have the right to:</p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Access your personal data</li>
-                <li>Correct inaccurate information</li>
-                <li>Delete your account and data</li>
-                <li>Export your data</li>
-                <li>Opt-out of certain data processing</li>
-                <li>Withdraw consent at any time</li>
-              </ul>
-            </div>
-          </div>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We use the information we collect for the following purposes:
+            </p>
+            <ul className="list-disc list-inside text-base text-gray-300 space-y-2 mb-4 ml-4">
+              <li>
+                <strong className="text-white">
+                  To provide and maintain our services:
+                </strong>{" "}
+                Including creating your account, processing your requests, and
+                delivering the features of the application
+              </li>
+              <li>
+                <strong className="text-white">
+                  To personalize your experience:
+                </strong>{" "}
+                Providing customized workout recommendations, nutrition plans,
+                and fitness insights based on your goals and progress
+              </li>
+              <li>
+                <strong className="text-white">To improve our services:</strong>{" "}
+                Analyzing usage patterns, testing new features, and enhancing
+                app performance
+              </li>
+              <li>
+                <strong className="text-white">To communicate with you:</strong>{" "}
+                Sending you updates, notifications, and responding to your
+                inquiries
+              </li>
+              <li>
+                <strong className="text-white">To ensure security:</strong>{" "}
+                Detecting and preventing fraud, abuse, and security incidents
+              </li>
+              <li>
+                <strong className="text-white">
+                  To comply with legal obligations:
+                </strong>{" "}
+                Meeting legal requirements and responding to lawful requests
+                from authorities
+              </li>
+            </ul>
+          </section>
 
-          {/* Contact Information */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Mail className="h-8 w-8 text-[#e0fe10]" />
-              <h2 className="text-3xl font-black">Contact Us</h2>
-            </div>
-            <div className="text-gray-300 space-y-4">
-              <p>
-                If you have any questions about this Privacy Policy or our data
-                practices, please contact us:
-              </p>
-              <div className="bg-[#2a3a40] p-4 rounded-lg">
-                <p>
-                  <strong>Email:</strong> contact.jymfitness@gmail.com
-                </p>
-                <p>
-                  <strong>Support:</strong>{" "}
-                  <Link href="/contact" className="text-[#e0fe10] underline">
-                    Contact Form
-                  </Link>
-                </p>
-              </div>
-              <p className="text-sm text-gray-400">
-                We will respond to your inquiry within 24-48 hours.
-              </p>
-            </div>
-          </div>
-
-          {/* Updates */}
-          <div className="bg-[#222222] rounded-[40px] p-8">
-            <h2 className="text-3xl font-black mb-6 text-[#e0fe10]">
-              Policy Updates
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              3. Information Sharing and Disclosure
             </h2>
-            <div className="text-gray-300">
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We do not sell your personal information. We may share your
+              information only in the following circumstances:
+            </p>
+
+            <h3 className="text-xl font-semibold text-white mb-4">
+              3.1 Service Providers
+            </h3>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We work with third-party service providers who perform services on
+              our behalf, including:
+            </p>
+            <ul className="list-disc list-inside text-base text-gray-300 space-y-2 mb-6 ml-4">
+              <li>
+                <strong className="text-white">
+                  Cloud hosting and storage:
+                </strong>{" "}
+                Amazon Web Services (AWS)
+              </li>
+              <li>
+                <strong className="text-white">Authentication services:</strong>{" "}
+                Clerk
+              </li>
+              <li>
+                <strong className="text-white">
+                  Analytics and performance monitoring:
+                </strong>{" "}
+                Firebase Analytics
+              </li>
+              <li>
+                <strong className="text-white">Payment processing:</strong>{" "}
+                Apple App Store and Google Play Store
+              </li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-white mb-4">
+              3.2 Legal Requirements
+            </h3>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We may disclose your information if required by law, regulation,
+              legal process, or governmental request, or when we believe
+              disclosure is necessary to protect our rights, your safety, or the
+              safety of others.
+            </p>
+
+            <h3 className="text-xl font-semibold text-white mb-4">
+              3.3 Business Transfers
+            </h3>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              If JYM Fitness is involved in a merger, acquisition, or sale of
+              assets, your information may be transferred as part of that
+              transaction. We will notify you via email and/or prominent notice
+              in the app of any such change in ownership.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              4. Data Security
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We implement appropriate technical and organizational measures to
+              protect your personal information against unauthorized access,
+              alteration, disclosure, or destruction. These measures include:
+            </p>
+            <ul className="list-disc list-inside text-base text-gray-300 space-y-2 mb-4 ml-4">
+              <li>Encryption of data in transit and at rest</li>
+              <li>Regular security assessments and updates</li>
+              <li>Access controls and authentication requirements</li>
+              <li>Secure data centers with physical security measures</li>
+              <li>Employee training on data protection and privacy</li>
+            </ul>
+            <p className="text-base text-gray-300 leading-relaxed">
+              However, no method of transmission over the Internet or electronic
+              storage is 100% secure. While we strive to protect your
+              information, we cannot guarantee its absolute security.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              5. Data Retention
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We retain your personal information for as long as necessary to
+              provide you with our services and as described in this Privacy
+              Policy. We will retain and use your information to the extent
+              necessary to comply with our legal obligations, resolve disputes,
+              and enforce our agreements.
+            </p>
+            <p className="text-base text-gray-300 leading-relaxed">
+              If you delete your account, we will delete or anonymize your
+              personal information within 30 days, except where we are required
+              to retain it for legal purposes.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              6. Your Privacy Rights
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              Depending on your location, you may have certain rights regarding
+              your personal information:
+            </p>
+            <ul className="list-disc list-inside text-base text-gray-300 space-y-2 mb-4 ml-4">
+              <li>
+                <strong className="text-white">Right to Access:</strong> Request
+                a copy of the personal information we hold about you
+              </li>
+              <li>
+                <strong className="text-white">Right to Rectification:</strong>{" "}
+                Request correction of inaccurate or incomplete information
+              </li>
+              <li>
+                <strong className="text-white">Right to Erasure:</strong>{" "}
+                Request deletion of your personal information
+              </li>
+              <li>
+                <strong className="text-white">
+                  Right to Data Portability:
+                </strong>{" "}
+                Request a copy of your data in a structured, machine-readable
+                format
+              </li>
+              <li>
+                <strong className="text-white">Right to Object:</strong> Object
+                to processing of your personal information
+              </li>
+              <li>
+                <strong className="text-white">
+                  Right to Restrict Processing:
+                </strong>{" "}
+                Request restriction of processing your personal information
+              </li>
+              <li>
+                <strong className="text-white">
+                  Right to Withdraw Consent:
+                </strong>{" "}
+                Withdraw consent where processing is based on consent
+              </li>
+            </ul>
+            <p className="text-base text-gray-300 leading-relaxed">
+              To exercise any of these rights, please contact us at
+              contact.jymfitness@gmail.com or through our account deletion page.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              7. Children&apos;s Privacy
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              JYM Fitness is not intended for children under the age of 13. We
+              do not knowingly collect personal information from children under
+              13. If you are a parent or guardian and believe that your child
+              has provided us with personal information, please contact us
+              immediately.
+            </p>
+            <p className="text-base text-gray-300 leading-relaxed">
+              If we discover that we have collected personal information from a
+              child under 13, we will take steps to delete that information as
+              quickly as possible.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              8. International Data Transfers
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              Your information may be transferred to and processed in countries
+              other than your country of residence. These countries may have
+              data protection laws that are different from the laws of your
+              country.
+            </p>
+            <p className="text-base text-gray-300 leading-relaxed">
+              When we transfer your information internationally, we take steps
+              to ensure that your information receives an adequate level of
+              protection through appropriate safeguards.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              9. Changes to This Privacy Policy
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              We may update this Privacy Policy from time to time. We will
+              notify you of any material changes by posting the new Privacy
+              Policy in the application and updating the &quot;Last
+              Updated&quot; date at the top of this policy.
+            </p>
+            <p className="text-base text-gray-300 leading-relaxed">
+              We encourage you to review this Privacy Policy periodically. Your
+              continued use of JYM Fitness after any changes constitutes your
+              acceptance of the updated Privacy Policy.
+            </p>
+          </section>
+
+          <section className="mb-12 pb-8 border-b border-gray-800">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              10. Contact Us
+            </h2>
+            <p className="text-base text-gray-300 leading-relaxed mb-4">
+              If you have any questions, concerns, or requests regarding this
+              Privacy Policy or our data practices, please contact us at:
+            </p>
+            <div className="text-base text-gray-300 space-y-2">
               <p>
-                We may update this Privacy Policy from time to time. We will
-                notify you of any significant changes through the app or via
-                email. Your continued use of the app after such changes
-                constitutes acceptance of the updated policy.
+                <strong className="text-white">Company Name:</strong> JYM
+                Fitness
+              </p>
+              <p>
+                <strong className="text-white">Email:</strong>{" "}
+                <a
+                  href="mailto:contact.jymfitness@gmail.com"
+                  className="text-white underline hover:text-gray-300"
+                >
+                  contact.jymfitness@gmail.com
+                </a>
+              </p>
+              <p>
+                <strong className="text-white">Support:</strong>{" "}
+                <Link
+                  href="/contact"
+                  className="text-white underline hover:text-gray-300"
+                >
+                  https://jymfitness.com/contact
+                </Link>
+              </p>
+              <p>
+                <strong className="text-white">Account Deletion:</strong>{" "}
+                <Link
+                  href="/delete-account"
+                  className="text-white underline hover:text-gray-300"
+                >
+                  https://jymfitness.com/delete-account
+                </Link>
               </p>
             </div>
-          </div>
+            <p className="text-base text-gray-300 leading-relaxed mt-4">
+              We will respond to your inquiry within 48 hours.
+            </p>
+          </section>
         </div>
+      </div>
 
-        {/* Back to Home Button */}
-        <div className="text-center mt-12">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#e0fe10] text-black font-bold rounded-full hover:bg-[#d0ee00] transition-all duration-300"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Home
-          </Link>
+      {/* Footer Navigation */}
+      <div className="border-t border-gray-800 bg-black/50 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <Link
+              href="/"
+              className="text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              ← Back to Home
+            </Link>
+            <div className="flex gap-6 text-sm text-gray-400">
+              <Link
+                href="/terms-of-use"
+                className="hover:text-white transition-colors"
+              >
+                Terms of Use
+              </Link>
+              <Link
+                href="/contact"
+                className="hover:text-white transition-colors"
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

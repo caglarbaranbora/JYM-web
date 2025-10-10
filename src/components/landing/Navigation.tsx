@@ -43,38 +43,38 @@ export default function Navigation() {
         style={{ width: "calc(100% - 2rem)", maxWidth: "1200px" }}
       >
         <button
-          className="text-white text-sm lg:text-md hover:text-gray-300"
+          className="text-white text-sm lg:text-lg hover:text-gray-300"
           onClick={() => router.push("/privacy-policy")}
         >
           Privacy & Policy
         </button>
         <button
-          className="text-white text-sm lg:text-md hover:text-gray-300"
+          className="text-white text-sm lg:text-lg hover:text-gray-300"
           onClick={() => router.push("/terms-of-use")}
         >
-          EULA
+          Terms of Use
         </button>
         <div
           className="transition-colors cursor-pointer"
           onClick={() => router.push("/")}
         >
           <Image
-            src="/yellowLogo.png"
+            src="/1024x512.png"
             alt="logo"
-            width={70}
-            height={70}
-            className="w-12 lg:w-16 xl:w-[70px] h-auto"
+            width={100}
+            height={100}
+            className="w-12 lg:w-16 xl:w-[130px] h-auto"
           />
         </div>
 
         <button
-          className="text-white text-sm lg:text-md hover:text-gray-300"
+          className="text-white text-sm lg:text-lg hover:text-gray-300"
           onClick={() => router.push("/about")}
         >
           About
         </button>
         <button
-          className="text-white text-sm lg:text-md hover:text-gray-300"
+          className="text-white text-sm lg:text-lg hover:text-gray-300"
           onClick={() => router.push("/contact")}
         >
           Contact

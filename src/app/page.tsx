@@ -10,7 +10,7 @@ import Tracking from "@/components/landing/Tracking";
 
 export default function RootPage() {
   return (
-    <div className="min-h-screen md:py-8 md:px-4 bg-black text-foreground">
+    <div className="min-h-screen py-0 px-0 sm:py-4 sm:px-2 md:py-8 md:px-4 bg-black text-foreground">
       <div className="max-w-8xl mx-auto">
         <Navigation />
         <Hero />

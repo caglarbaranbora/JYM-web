@@ -59,7 +59,7 @@ export default function Navigation() {
           onClick={() => router.push("/")}
         >
           <Image
-            src="/1024x512.png"
+            src="/icons/1024x512.png"
             alt="logo"
             width={100}
             height={100}
@@ -95,7 +95,7 @@ export default function Navigation() {
           onClick={() => router.push("/")}
         >
           <Image
-            src="/yellowLogo.png"
+            src="/icons/yellowLogo.png"
             alt="logo"
             width={50}
             height={50}

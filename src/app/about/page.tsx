@@ -19,7 +19,7 @@ export default function AboutPage() {
           <div className="flex justify-between items-center h-20">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/yellowLogo.png"
+                src="/icons/yellowLogo.png"
                 alt="JYM Fitness"
                 width={50}
                 height={50}

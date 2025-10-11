@@ -89,7 +89,7 @@ export default function Footer() {
                   className="block"
                 >
                   <Image
-                    src="/apple.png"
+                    src="/icons/apple.png"
                     alt="App Store"
                     width={150}
                     height={40}
@@ -103,7 +103,7 @@ export default function Footer() {
                   className="block"
                 >
                   <Image
-                    src="/googleplay.png"
+                    src="/icons/googleplay.png"
                     alt="Google Play"
                     width={150}
                     height={40}
@@ -121,7 +121,7 @@ export default function Footer() {
             {/* Logo */}
             <div className="flex items-center gap-3 sm:gap-4">
               <Image
-                src="/yellowLogo.png"
+                src="/icons/yellowLogo.png"
                 alt="JYM Fitness"
                 width={60}
                 height={60}

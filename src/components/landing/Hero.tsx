@@ -11,9 +11,9 @@ type HeroProps = {
 export default function Hero({
   leftTitle = "Stay\nStrong",
   // point to provided public images
-  primaryMockupSrc = "/4.png",
-  secondaryMockupSrc = "/5.png",
-  thirdMockupSrc = "/9.png",
+  primaryMockupSrc = "/images/4.png",
+  secondaryMockupSrc = "/images/5.png",
+  thirdMockupSrc = "/images/9.png",
 }: HeroProps) {
   const [line1, line2] = leftTitle.split("\n");
   return (

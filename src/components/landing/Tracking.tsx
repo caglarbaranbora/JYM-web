@@ -14,7 +14,7 @@ export default function Tracking() {
         <div className="flex gap-2 sm:gap-3 md:gap-4 items-center justify-center">
           <div className="z-[9997]">
             <Image
-              src={"/11.png"}
+              src={"/images/11.png"}
               alt="mockup"
               width={310}
               height={800}
@@ -23,7 +23,7 @@ export default function Tracking() {
           </div>
           <div className="-ml-8 sm:-ml-12 md:-ml-16 lg:-ml-20 -mr-8 sm:-mr-12 md:-mr-16 lg:-mr-20 z-[9998]">
             <Image
-              src={"/12.png"}
+              src={"/images/12.png"}
               alt="mockup"
               width={370}
               height={800}
@@ -32,7 +32,7 @@ export default function Tracking() {
           </div>
           <div className="z-[9999] -mr-8 sm:-mr-12 md:-mr-16 lg:-mr-20">
             <Image
-              src={"/13.png"}
+              src={"/images/13.png"}
               alt="mockup1"
               width={400}
               height={800}
@@ -41,7 +41,7 @@ export default function Tracking() {
           </div>
           <div className="hidden sm:block z-[9998] -mr-8 sm:-mr-12 md:-mr-16 lg:-mr-20">
             <Image
-              src={"/14.png"}
+              src={"/images/14.png"}
               alt="mockup1"
               width={370}
               height={800}
@@ -50,7 +50,7 @@ export default function Tracking() {
           </div>
           <div className="hidden md:block z-[9997]">
             <Image
-              src={"/10.png"}
+              src={"/images/10.png"}
               alt="mockup1"
               width={310}
               height={800}

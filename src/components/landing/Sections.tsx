@@ -25,7 +25,7 @@ export default function GetYourFit() {
             className="cursor-pointer transition-transform hover:scale-105"
           >
             <Image
-              src={"/googleplay.png"}
+              src={"/icons/googleplay.png"}
               alt="playstore"
               width={200}
               height={0}
@@ -37,7 +37,7 @@ export default function GetYourFit() {
             className="cursor-pointer transition-transform hover:scale-105"
           >
             <Image
-              src={"/apple.png"}
+              src={"/icons/apple.png"}
               alt="appstore"
               width={200}
               height={0}
@@ -53,7 +53,7 @@ export default function GetYourFit() {
           {/* Show fewer images on mobile */}
           <div className="z-[9999]">
             <Image
-              src={"/1.png"}
+              src={"/images/1.png"}
               alt="mockup"
               width={400}
               height={800}
@@ -62,7 +62,7 @@ export default function GetYourFit() {
           </div>
           <div className="-ml-8 sm:-ml-12 md:-ml-16 lg:-ml-20 -mr-8 sm:-mr-12 md:-mr-16 lg:-mr-20 z-[9998]">
             <Image
-              src={"/2.png"}
+              src={"/images/2.png"}
               alt="mockup"
               width={370}
               height={800}
@@ -71,7 +71,7 @@ export default function GetYourFit() {
           </div>
           <div className="z-[9997] -mr-8 sm:-mr-12 md:-mr-16 lg:-mr-20">
             <Image
-              src={"/8.png"}
+              src={"/images/8.png"}
               alt="mockup1"
               width={340}
               height={800}
@@ -80,7 +80,7 @@ export default function GetYourFit() {
           </div>
           <div className="hidden md:block z-[9996] -mr-8 md:-mr-16 lg:-mr-20">
             <Image
-              src={"/6.png"}
+              src={"/images/6.png"}
               alt="mockup1"
               width={310}
               height={800}
@@ -89,7 +89,7 @@ export default function GetYourFit() {
           </div>
           <div className="hidden lg:block z-[9995]">
             <Image
-              src={"/7.png"}
+              src={"/images/7.png"}
               alt="mockup1"
               width={280}
               height={800}

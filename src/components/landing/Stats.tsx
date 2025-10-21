@@ -1,37 +1,56 @@
+"use client"
+import { motion } from "framer-motion"
+
 export default function Stats() {
   return (
     <div className="bg-black p-4 sm:p-6 md:p-8 relative">
-      <div className="text-center mb-6 sm:mb-8">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-6 sm:mb-8"
+      >
         <h2 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold mb-3 sm:mb-4">
-          Dream{" "}
-          <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl text-accent">
-            Bigger
-          </span>
-          , Achieve Beyond
+          Dream <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl text-accent">Bigger</span>,
+          Achieve Beyond
         </h2>
         <p className="text-gray-400 mx-auto text-sm sm:text-base md:text-lg lg:text-xl xl:text-3xl px-4">
           Push past your limits and turn ambition into reality with every rep!
         </p>
-      </div>
-      {/* Grid container - Responsive */}
+      </motion.div>
       <div className="grid grid-rows-1 md:grid-rows-2 lg:grid-rows-3 gap-4 sm:gap-4 mb-6 sm:mb-8 relative">
-        {/* 1. satır - Mobile: stacked, Tablet: 2 cols, Desktop: 3 cols */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_2fr] gap-4 sm:gap-4 lg:h-[100px] xl:h-[400px] relative">
-          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center p-6 sm:p-8 md:p-12 lg:p-16 font-semibold min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ scale: 1.05, rotate: -1 }}
+            className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center p-6 sm:p-8 md:p-12 lg:p-16 font-semibold min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             Nutrition Statistics
-          </div>
-          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ scale: 1.05, rotate: 1 }}
+            className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             Fitness Goals
-          </div>
-          <div className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0"
+          >
             <div className="flex items-center justify-center overflow-hidden scale-75 sm:scale-90 md:scale-100">
-              <svg
-                width="250"
-                height="250"
-                viewBox="0 0 200 200"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="250" height="250" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {" "}
                 <g clipPath="url(#clip0_105_284)">
                   {" "}
@@ -53,8 +72,7 @@ export default function Stats() {
                     gradientUnits="userSpaceOnUse"
                   >
                     {" "}
-                    <stop stopColor="#e0fe10" />{" "}
-                    <stop offset="2" stopColor="#3e25f5" />{" "}
+                    <stop stopColor="#e0fe10" /> <stop offset="2" stopColor="#3e25f5" />{" "}
                   </linearGradient>{" "}
                   <clipPath id="clip0_105_284">
                     {" "}
@@ -62,13 +80,7 @@ export default function Stats() {
                   </clipPath>{" "}
                 </defs>{" "}
               </svg>
-              <svg
-                width="250"
-                height="250"
-                viewBox="0 0 200 200"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="250" height="250" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {" "}
                 <g clipPath="url(#clip0_105_284)">
                   {" "}
@@ -90,8 +102,7 @@ export default function Stats() {
                     gradientUnits="userSpaceOnUse"
                   >
                     {" "}
-                    <stop stopColor="#3e25f5" />{" "}
-                    <stop offset="2" stopColor="#e0fe10" />{" "}
+                    <stop stopColor="#3e25f5" /> <stop offset="2" stopColor="#e0fe10" />{" "}
                   </linearGradient>{" "}
                   <clipPath id="clip0_105_284">
                     {" "}
@@ -99,13 +110,7 @@ export default function Stats() {
                   </clipPath>{" "}
                 </defs>{" "}
               </svg>
-              <svg
-                width="250"
-                height="250"
-                viewBox="0 0 200 200"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="250" height="250" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {" "}
                 <g clipPath="url(#clip0_105_284)">
                   {" "}
@@ -127,8 +132,7 @@ export default function Stats() {
                     gradientUnits="userSpaceOnUse"
                   >
                     {" "}
-                    <stop stopColor="#3e25f5" />{" "}
-                    <stop offset="2" stopColor="#e0fe10" />{" "}
+                    <stop stopColor="#3e25f5" /> <stop offset="2" stopColor="#e0fe10" />{" "}
                   </linearGradient>{" "}
                   <clipPath id="clip0_105_284">
                     {" "}
@@ -137,19 +141,20 @@ export default function Stats() {
                 </defs>{" "}
               </svg>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* 2. satır - Responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_2fr_1fr] gap-3 sm:gap-4 lg:h-[100px] xl:h-[400px]">
-          <div className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-xl font-semibold order-2 sm:order-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
-            <svg
-              width="300"
-              height="300"
-              viewBox="0 0 200 200"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            whileHover={{ scale: 1.05, rotate: -1 }}
+            className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-xl font-semibold order-2 sm:order-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
+            <svg width="300" height="300" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
               {" "}
               <g clipPath="url(#clip0_238_1161)">
                 {" "}
@@ -171,8 +176,7 @@ export default function Stats() {
                   gradientUnits="userSpaceOnUse"
                 >
                   {" "}
-                  <stop stopColor="#3e25f5" />{" "}
-                  <stop offset="1" stopColor="#e0e0e0" />{" "}
+                  <stop stopColor="#3e25f5" /> <stop offset="1" stopColor="#e0e0e0" />{" "}
                 </linearGradient>{" "}
                 <clipPath id="clip0_238_1161">
                   {" "}
@@ -180,8 +184,15 @@ export default function Stats() {
                 </clipPath>{" "}
               </defs>{" "}
             </svg>
-          </div>
-          <div className="bg-[#222222] flex flex-col sm:flex-row items-center justify-between rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-semibold p-6 sm:p-8 md:p-12 lg:p-16 gap-4 order-1 sm:order-2 sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            whileHover={{ scale: 1.05, rotate: 1 }}
+            className="bg-[#222222] flex flex-col sm:flex-row items-center justify-between rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-semibold p-6 sm:p-8 md:p-12 lg:p-16 gap-4 order-1 sm:order-2 sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             <div className="text-center sm:text-left">
               800+ <span className="text-accent">Exercises</span>
             </div>
@@ -215,8 +226,7 @@ export default function Stats() {
                     gradientUnits="userSpaceOnUse"
                   >
                     {" "}
-                    <stop stopColor="#B0B9FF" />{" "}
-                    <stop offset="1" stopColor="#E7E9FF" />{" "}
+                    <stop stopColor="#B0B9FF" /> <stop offset="1" stopColor="#E7E9FF" />{" "}
                   </linearGradient>{" "}
                   <clipPath id="clip0_231_793">
                     {" "}
@@ -225,23 +235,51 @@ export default function Stats() {
                 </defs>{" "}
               </svg>
             </div>
-          </div>
-          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center p-6 sm:p-8 md:p-12 lg:p-16 order-3 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            whileHover={{ scale: 1.05, rotate: -1 }}
+            className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center p-6 sm:p-8 md:p-12 lg:p-16 order-3 min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             <p>
               100+ Public <span className="text-[#e0fe10]">Workout</span> plan
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* 3. satır - Responsive */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-4 sm:gap-4 lg:h-[100px] xl:h-[400px]">
-          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-semibold p-6 sm:p-8 md:p-12 lg:p-16 sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            whileHover={{ scale: 1.05, rotate: 1 }}
+            className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-semibold p-6 sm:p-8 md:p-12 lg:p-16 sm:col-span-2 lg:col-span-1 min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             Calorie <span className="text-[#e0fe10]">AI+</span>
-          </div>
-          <div className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            whileHover={{ scale: 1.05, rotate: -1 }}
+            className="bg-[#222222] flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             Day by day Analytics
-          </div>
-          <div className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-xl font-semibold min-h-[120px] sm:min-h-[150px] lg:min-h-0">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center justify-center rounded-[30px] sm:rounded-[40px] md:rounded-[60px] lg:rounded-[80px] text-xl font-semibold min-h-[120px] sm:min-h-[150px] lg:min-h-0 cursor-pointer"
+          >
             <svg
               width="300"
               height="300"
@@ -268,14 +306,13 @@ export default function Stats() {
                   gradientUnits="userSpaceOnUse"
                 >
                   {" "}
-                  <stop offset="0.0509862" stopColor="#e0fe10" />{" "}
-                  <stop offset="1" stopColor="#e0e0e0" />{" "}
+                  <stop offset="0.0509862" stopColor="#e0fe10" /> <stop offset="1" stopColor="#e0e0e0" />{" "}
                 </linearGradient>{" "}
               </defs>{" "}
             </svg>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
-  );
+  )
 }

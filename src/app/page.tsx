@@ -1,7 +1,6 @@
 import Hero from "@/components/landing/Hero";
 import Navigation from "@/components/landing/Navigation";
 import GetYourFit from "@/components/landing/Sections";
-import Pricing from "@/components/landing/Pricing";
 import CalorieAi from "@/components/landing/CalorieAi";
 import Footer from "@/components/landing/Footer";
 import Stats from "@/components/landing/Stats";

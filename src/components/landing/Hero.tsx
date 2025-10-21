@@ -20,15 +20,15 @@ export default function Hero({
   const router = useRouter();
   useEffect(() => {
     // Unicorn Studio script'ini yükle
-    if (!window.UnicornStudio) {
-      window.UnicornStudio = { isInitialized: false };
+    if (!(window as any).UnicornStudio) {
+      (window as any).UnicornStudio = { isInitialized: false };
       const script = document.createElement("script");
       script.src =
         "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js";
       script.onload = () => {
-        if (!window.UnicornStudio.isInitialized) {
-          window.UnicornStudio.init();
-          window.UnicornStudio.isInitialized = true;
+        if (!(window as any).UnicornStudio.isInitialized) {
+          (window as any).UnicornStudio.init();
+          (window as any).UnicornStudio.isInitialized = true;
         }
       };
       (document.head || document.body).appendChild(script);

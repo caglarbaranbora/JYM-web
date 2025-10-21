@@ -1,12 +1,12 @@
-import Hero from "@/components/landing/Hero"
-import Navigation from "@/components/landing/Navigation"
-import GetYourFit from "@/components/landing/Sections"
-import Pricing from "@/components/landing/Pricing"
-import CalorieAi from "@/components/landing/CalorieAi"
-import Footer from "@/components/landing/Footer"
-import Stats from "@/components/landing/Stats"
-import Tracking from "@/components/landing/Tracking"
-import AnimatedSection from "@/components/animations/AnimatedSection"
+import Hero from "@/components/landing/Hero";
+import Navigation from "@/components/landing/Navigation";
+import GetYourFit from "@/components/landing/Sections";
+import Pricing from "@/components/landing/Pricing";
+import CalorieAi from "@/components/landing/CalorieAi";
+import Footer from "@/components/landing/Footer";
+import Stats from "@/components/landing/Stats";
+import Tracking from "@/components/landing/Tracking";
+import AnimatedSection from "@/components/animations/AnimatedSection";
 
 export default function RootPage() {
   return (
@@ -26,10 +26,6 @@ export default function RootPage() {
           <CalorieAi />
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2}>
-          <Pricing />
-        </AnimatedSection>
-
         <AnimatedSection delay={0.1}>
           <Stats />
         </AnimatedSection>
@@ -43,5 +39,5 @@ export default function RootPage() {
         </AnimatedSection>
       </div>
     </div>
-  )
+  );
 }

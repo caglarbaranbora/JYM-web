@@ -102,3 +102,7 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+body {
+  user-select: none;
+}

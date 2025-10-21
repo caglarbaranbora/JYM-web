@@ -1,45 +1,45 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Menu, X } from "lucide-react";
+"use client"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { Menu, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function Navigation() {
-  const router = useRouter();
-  const [isVisible, setIsVisible] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const router = useRouter()
+  const [isVisible, setIsVisible] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      const heroHeight = 50;
+      const heroHeight = 50
 
       if (window.scrollY > heroHeight) {
-        setIsVisible(true);
+        setIsVisible(true)
       } else {
-        setIsVisible(false);
+        setIsVisible(false)
       }
-    };
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const menuItems = [
     { label: "Privacy & Policy", path: "/privacy-policy" },
     { label: "EULA", path: "/terms-of-use" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
-  ];
+  ]
 
   return (
     <>
       {/* Desktop Navigation */}
-      <nav
-        className={`bg-black rounded-full px-4 sm:px-6 py-3 hidden md:flex items-center justify-between mb-4 fixed top-4 left-1/2 -translate-x-1/2 z-[99999] transition-all duration-300 ${
-          isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20, pointerEvents: "none" }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bg-black rounded-full px-4 sm:px-6 py-3 hidden md:flex items-center justify-between mb-4 fixed top-4 left-1/2 -translate-x-1/2 z-[99999]"
         style={{ width: "calc(100% - 2rem)", maxWidth: "1200px" }}
       >
         <button
@@ -54,10 +54,7 @@ export default function Navigation() {
         >
           Terms of Use
         </button>
-        <div
-          className="transition-colors cursor-pointer"
-          onClick={() => router.push("/")}
-        >
+        <div className="transition-colors cursor-pointer" onClick={() => router.push("/")}>
           <Image
             src="/icons/1024x512.png"
             alt="logo"
@@ -67,74 +64,62 @@ export default function Navigation() {
           />
         </div>
 
-        <button
-          className="text-white text-sm lg:text-lg hover:text-gray-300"
-          onClick={() => router.push("/about")}
-        >
+        <button className="text-white text-sm lg:text-lg hover:text-gray-300" onClick={() => router.push("/about")}>
           About
         </button>
-        <button
-          className="text-white text-sm lg:text-lg hover:text-gray-300"
-          onClick={() => router.push("/contact")}
-        >
+        <button className="text-white text-sm lg:text-lg hover:text-gray-300" onClick={() => router.push("/contact")}>
           Contact
         </button>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Navigation */}
-      <nav
-        className={`bg-black rounded-full px-4 py-3 flex md:hidden items-center justify-between mb-4 fixed top-4 left-1/2 -translate-x-1/2 z-[99999] transition-all duration-300 ${
-          isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20, pointerEvents: "none" }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="bg-black rounded-full px-4 py-3 flex md:hidden items-center justify-between mb-4 fixed top-4 left-1/2 -translate-x-1/2 z-[99999]"
         style={{ width: "calc(100% - 2rem)", maxWidth: "500px" }}
       >
-        <div
-          className="transition-colors cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image
-            src="/icons/yellowLogo.png"
-            alt="logo"
-            width={50}
-            height={50}
-            className="w-10 sm:w-12 h-auto"
-          />
+        <div className="transition-colors cursor-pointer" onClick={() => router.push("/")}>
+          <Image src="/icons/yellowLogo.png" alt="logo" width={50} height={50} className="w-10 sm:w-12 h-auto" />
         </div>
 
-        <button
-          className="text-white p-2 hover:text-gray-300"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
+        <button className="text-white p-2 hover:text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div
-          className={`md:hidden fixed top-20 left-1/2 -translate-x-1/2 z-[99998] bg-black rounded-3xl p-6 shadow-xl transition-all duration-300 ${
-            isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-          style={{ width: "calc(100% - 2rem)", maxWidth: "500px" }}
-        >
-          <div className="flex flex-col gap-4">
-            {menuItems.map((item, index) => (
-              <button
-                key={index}
-                className="text-white text-left py-2 px-4 hover:bg-gray-800 rounded-lg transition-colors"
-                onClick={() => {
-                  router.push(item.path);
-                  setMobileMenuOpen(false);
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && isVisible && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="md:hidden fixed top-20 left-1/2 -translate-x-1/2 z-[99998] bg-black rounded-3xl p-6 shadow-xl"
+            style={{ width: "calc(100% - 2rem)", maxWidth: "500px" }}
+          >
+            <div className="flex flex-col gap-4">
+              {menuItems.map((item, index) => (
+                <motion.button
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.2 }}
+                  className="text-white text-left py-2 px-4 hover:bg-gray-800 rounded-lg transition-colors"
+                  onClick={() => {
+                    router.push(item.path)
+                    setMobileMenuOpen(false)
+                  }}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
-  );
+  )
 }

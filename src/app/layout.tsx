@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 // Switch from Google Geist to local HubotSans/PolySans per user's provided fonts
 import localFont from "next/font/local";
 import "./globals.css";
@@ -73,12 +74,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${hubotSans.variable} ${polySans.variable} antialiased dark`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${hubotSans.variable} ${polySans.variable} antialiased dark`}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

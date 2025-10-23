@@ -14,11 +14,6 @@ const ALLOWED_ORIGINS =
   process.env.ALLOWED_ORIGINS?.split(",").map((s) => s.trim()).filter(Boolean) ?? [];
 const ALLOW_NO_ORIGIN = (process.env.ALLOW_NO_ORIGIN ?? "true").toLowerCase() === "true";
 
-const REQUIRED_ROLES =
-  process.env.CLERK_REQUIRED_ROLES?.split(",").map((s) => s.trim()).filter(Boolean) ?? [];
-const REQUIRED_ORG_IDS =
-  process.env.CLERK_REQUIRED_ORG_IDS?.split(",").map((s) => s.trim()).filter(Boolean) ?? [];
-
 function pickEnvFromSet() {
   const obj: Record<string, string> = {};
   for (const key of ENV_WHITELIST_SET) {
@@ -59,31 +54,6 @@ function checkOrigin(req: NextRequest) {
   return { ok: ALLOWED_ORIGINS.includes(origin), origin };
 }
 
-async function checkRoleAndOrg(userId: string) {
-  if (REQUIRED_ROLES.length === 0 && REQUIRED_ORG_IDS.length === 0) return { ok: true };
-
-  const clerkClient = await _clerkClientFn();
-  const user = await clerkClient.users.getUser(userId);
-
-  if (REQUIRED_ROLES.length > 0) {
-    const roleVal = (user.publicMetadata?.role ?? user.privateMetadata?.role) as unknown;
-    const roles: string[] =
-      Array.isArray(roleVal) ? roleVal.map(String) :
-      typeof roleVal === "string" ? [roleVal] : [];
-    const hasRequiredRole = roles.some((r) => REQUIRED_ROLES.includes(r));
-    if (!hasRequiredRole) return { ok: false, reason: "missing-role" };
-  }
-
-  if (REQUIRED_ORG_IDS.length > 0) {
-    const memberships = await clerkClient.users.getOrganizationMembershipList({ userId });
-    const userOrgIds = memberships.data.map((m) => m.organization.id);
-    const inRequiredOrg = userOrgIds.some((id) => REQUIRED_ORG_IDS.includes(id));
-    if (!inRequiredOrg) return { ok: false, reason: "missing-org" };
-  }
-
-  return { ok: true };
-}
-
 export async function GET(req: NextRequest) {
   if (req.method !== "GET") return methodNotAllowed();
   if (!isHttps(req) && process.env.NODE_ENV === "production") return forbidden("HTTPS required");
@@ -95,9 +65,6 @@ export async function GET(req: NextRequest) {
   try { auth = getAuth(req); } catch { return unauthorized("Authentication middleware error"); }
   const { userId } = auth;
   if (!userId) return unauthorized("No valid Clerk session");
-
-  const roleOrg = await checkRoleAndOrg(userId);
-  if (!roleOrg.ok) return forbidden("Insufficient privileges");
 
   const data = pickEnvFromSet();
   if (Object.keys(data).length === 0) return badRequest("Empty ENV_WHITELIST or keys missing");

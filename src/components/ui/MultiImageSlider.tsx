@@ -1,18 +1,17 @@
-"use client"
-import { useState, useEffect, useMemo } from "react"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+"use client";
+import { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface MultiImageSliderProps {
   images: {
-    src: string
-    alt: string
-    width: number
-    height: number
-  }[]
-  autoPlayInterval?: number
-  className?: string
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  }[];
+  autoPlayInterval?: number;
+  className?: string;
 }
 
 export default function MultiImageSlider({
@@ -20,63 +19,57 @@ export default function MultiImageSlider({
   autoPlayInterval = 4000,
   className = "",
 }: MultiImageSliderProps) {
-  const [focusedIndex, setFocusedIndex] = useState(0)
+  const [focusedIndex, setFocusedIndex] = useState(0);
 
   // --- Tweakable constants (hassas ayar) ---
-  const SPACING = 180       // yan yana temel aralık
-  const OVERLAP_PULL = -50  // üst üste bindirmek için merkeze çekiş
-  const SCALE_BASE = 1.0
-  const SCALE_STEP = 0.15   // her uzaklıkta ne kadar küçülsün
-  const OPACITY_MIN = 0.4
-  const OPACITY_STEP = 0.2
+  const SPACING = 180; // yan yana temel aralık
+  const OVERLAP_PULL = -50; // üst üste bindirmek için merkeze çekiş
+  const SCALE_BASE = 1.0;
+  const SCALE_STEP = 0.15; // her uzaklıkta ne kadar küçülsün
+  const OPACITY_MIN = 0.4;
+  const OPACITY_STEP = 0.2;
 
   // dairesel (circular) imleç — en kısa imzalı mesafe
   const circularDistance = (i: number, j: number, n: number) => {
-    let d = i - j
-    if (d > n / 2) d -= n
-    if (d < -n / 2) d += n
-    return d
-  }
+    let d = i - j;
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return d;
+  };
 
   useEffect(() => {
-    if (images.length <= 1) return
+    if (images.length <= 1) return;
     const timer = setInterval(() => {
-      setFocusedIndex((prev) => (prev + 1) % images.length)
-    }, autoPlayInterval)
-    return () => clearInterval(timer)
-  }, [images.length, autoPlayInterval])
+      setFocusedIndex((prev) => (prev + 1) % images.length);
+    }, autoPlayInterval);
+    return () => clearInterval(timer);
+  }, [images.length, autoPlayInterval]);
 
-  const goToPrevious = () => {
-    setFocusedIndex((prev) => (prev - 1 + images.length) % images.length)
-  }
-  const goToNext = () => {
-    setFocusedIndex((prev) => (prev + 1) % images.length)
-  }
-  const goToSlide = (index: number) => setFocusedIndex(index)
+  const goToSlide = (index: number) => setFocusedIndex(index);
 
   const styles = useMemo(() => {
-    const n = images.length
+    const n = images.length;
     return images.map((_, index) => {
-      const d = circularDistance(index, focusedIndex, n)
-      const absD = Math.abs(d)
+      const d = circularDistance(index, focusedIndex, n);
+      const absD = Math.abs(d);
 
       // merkez hep x=0 — diğerleri merkeze yakınlaşarak konumlanır
-      const baseOffset = d * SPACING
-      const overlapOffset = d * OVERLAP_PULL
-      const x = baseOffset + overlapOffset
+      const baseOffset = d * SPACING;
+      const overlapOffset = d * OVERLAP_PULL;
+      const x = baseOffset + overlapOffset;
 
-      const scale = Math.max(0.7, SCALE_BASE - absD * SCALE_STEP)
-      const opacity = Math.max(OPACITY_MIN, 1 - absD * OPACITY_STEP)
+      const scale = Math.max(0.7, SCALE_BASE - absD * SCALE_STEP);
+      const opacity = Math.max(OPACITY_MIN, 1 - absD * OPACITY_STEP);
 
       // z-index: merkeze en yakın olan üstte
-      const zIndex = 1000 - absD
+      const zIndex = 1000 - absD;
 
       // hafif 3D etki için küçük bir tilt (opsiyonel)
-      const rotateY = d * -4
+      const rotateY = d * -4;
 
-      return { x, scale, opacity, zIndex, rotateY }
-    })
-  }, [images, focusedIndex])
+      return { x, scale, opacity, zIndex, rotateY };
+    });
+  }, [images, focusedIndex, OVERLAP_PULL]);
 
   return (
     <div className={`relative w-full ${className}`}>
@@ -87,8 +80,8 @@ export default function MultiImageSlider({
           style={{ perspective: "1000px" }}
         >
           {images.map((image, index) => {
-            const style = styles[index]
-            const isFocused = index === focusedIndex
+            const style = styles[index];
+            const isFocused = index === focusedIndex;
             return (
               <motion.div
                 key={index}
@@ -117,7 +110,7 @@ export default function MultiImageSlider({
                   draggable={false}
                 />
               </motion.div>
-            )
+            );
           })}
         </div>
       </div>
@@ -156,5 +149,5 @@ export default function MultiImageSlider({
         </>
       )} */}
     </div>
-  )
+  );
 }

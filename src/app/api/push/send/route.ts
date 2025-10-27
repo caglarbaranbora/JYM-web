@@ -1,69 +1,86 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
-import { verifyToken } from "@clerk/backend";
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { initFirebaseAdmin } from "@/lib/firebaseAdmin";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { sendExpoMessages } from "@/lib/expoPush";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); }
-function unauthorized(m = "Unauthorized") { return json({ ok: false, error: m }, { status: 401 }); }
 function badRequest(m = "Bad Request") { return json({ ok: false, error: m }, { status: 400 }); }
+function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
+
+// Basit sunucu anahtarı (önerilir)
+const REQ_KEY_HEADER = "x-server-key";
+const SERVER_KEY = process.env.SERVER_PUSH_KEY;
+
+// Sadece Expo token doğrulaması yapmak istiyorsan açık bırak:
+const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;
 
 export async function POST(req: NextRequest) {
-    // Auth
-    let userId: string | null = null;
-    const authz = req.headers.get("authorization");
-    const bearer = authz?.match(/^Bearer\s+(.+)/i)?.[1];
-    try {
-        if (bearer) {
-            if (!process.env.CLERK_SECRET_KEY) return unauthorized("Server configuration error");
-            const payload = await verifyToken(bearer, { secretKey: process.env.CLERK_SECRET_KEY });
-            userId = payload.sub ?? null;
-        } else {
-            const a = await auth();
-            userId = a.userId ?? null;
-        }
-    } catch { return unauthorized("Authentication verification failed"); }
-    if (!userId) return unauthorized("No valid Clerk session");
+    // Güvenlik: sunucu anahtarı
+    if (SERVER_KEY) {
+        const k = req.headers.get(REQ_KEY_HEADER);
+        if (k !== SERVER_KEY) return forbidden("Invalid or missing server key");
+    }
 
-    let body: any; try { body = await req.json(); } catch { return badRequest("Invalid JSON body"); }
+    let body: any;
+    try { body = await req.json(); }
+    catch { return badRequest("Invalid JSON body"); }
 
-    // tek kullanıcıya veya çok kullanıcıya destek:
-    // 1) { toUserId, title, body, data }
-    // 2) { toUserIds: string[], title, body, data }
-    const { toUserId, toUserIds, title, body: msgBody, data } = body || {};
+    // Kullanım:
+    // 1) { toUserId, title, body, data? }
+    // 2) { toUserIds: string[], title, body, data? }
+    const { toUserId, toUserIds, title, body: msgBody, data, priority = "default" } = body || {};
     if ((!toUserId && !Array.isArray(toUserIds)) || !title || !msgBody) {
-        return badRequest("toUserId OR toUserIds, and title, body required");
+        return badRequest("toUserId OR toUserIds, and title, body are required");
     }
 
     initFirebaseAdmin();
     const db = getFirestore();
 
-    // hedef kullanıcıları topla
+    // Hedef kullanıcıları topla
     const targetIds: string[] = Array.isArray(toUserIds) ? toUserIds : [toUserId];
 
-    // tokenları getir
+    // Firestore’dan tokenları çek
+    const refs = targetIds.map((id) => db.collection("userPushTokens").doc(id));
+    const snaps = await db.getAll(...refs);
+
     const tokens: string[] = [];
-    const userRefs = targetIds.map(id => db.collection("users").doc(id));
-    const snaps = await db.getAll(...userRefs);
     for (const s of snaps) {
         if (!s.exists) continue;
-        const arr = Array.isArray(s.data()?.pushTokens) ? s.data()!.pushTokens : [];
-        for (const t of arr) if (t?.token) tokens.push(t.token);
+
+        // burada pushTokens yerine tokens kullan
+        const arr = Array.isArray(s.data()?.tokens) ? s.data()!.tokens : [];
+        for (const t of arr) {
+            if (t?.token) tokens.push(t.token);
+        }
     }
     if (tokens.length === 0) return badRequest("No push tokens for target user(s)");
 
-    const messages = tokens.map((to) => ({ to, sound: "default" as const, title, body: msgBody, data }));
+    // (Opsiyonel) Expo token format validation
+    const invalid = tokens.filter((t) => !EXPO_TOKEN_RE.test(t));
+    if (invalid.length) {
+        // İstersen burada invalidleri sessizce atlayıp kalanlara gönderim yapabilirsin.
+        return badRequest(`Invalid Expo token(s): ${invalid.join(", ")}`);
+    }
+
+    // Mesajı hazırla
+    const messages = tokens.map((to) => ({
+        to,
+        sound: "default" as const,
+        title,
+        body: msgBody,
+        data: data || {},
+        priority: (priority === "high" ? "high" : "default") as "default" | "high",
+    }));
+
+    // Gönder + ticket logla
     const ticketIds = await sendExpoMessages(messages);
 
-    // opsiyonel: ticket logla (receipt cron'u için)
     if (ticketIds.length) {
         await db.collection("pushTickets").add({
             createdAt: FieldValue.serverTimestamp(),
-            createdBy: userId,
             targetUserIds: targetIds,
             tickets: ticketIds,
             meta: { title, dataType: data?.type ?? null }

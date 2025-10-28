@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 
 function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); }
 function badRequest(m = "Bad Request") { return json({ ok: false, error: m }, { status: 400 }); }
-function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
 
 // Sadece Expo token doğrulaması yapmak istiyorsan açık bırak:
 const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;

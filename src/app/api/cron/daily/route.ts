@@ -9,13 +9,10 @@ export const dynamic = "force-dynamic";
 
 const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;
 
-function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); }
-function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
-
 export async function GET(req: NextRequest) {
   const signature = req.headers.get("x-vercel-cron-signature");
   if (signature !== process.env.VERCEL_CRON_SECRET) {
-    return forbidden("Invalid or missing cron signature");
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   initFirebaseAdmin();
@@ -23,7 +20,13 @@ export async function GET(req: NextRequest) {
 
   const qs = await db.collection("userPushTokens").get();
 
-  const messages: { to: string; sound: "default"; title: string; body: string; data: any }[] = [];
+  const messages: {
+    to: string;
+    sound: "default";
+    title: string;
+    body: string;
+    data: any;
+  }[] = [];
   qs.forEach((doc) => {
     const data = doc.data() || {};
     const tokensArr = Array.isArray(data.tokens) ? data.tokens : [];
@@ -42,9 +45,17 @@ export async function GET(req: NextRequest) {
   });
 
   if (messages.length === 0) {
-    return NextResponse.json({ ok: false, users: qs.size, ticketCount: 0, error: "No valid tokens" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, users: qs.size, ticketCount: 0, error: "No valid tokens" },
+      { status: 400 }
+    );
   }
 
   const tickets = await sendExpoMessages(messages);
-  return NextResponse.json({ ok: true, users: qs.size, sent: messages.length, ticketCount: tickets.length });
+  return NextResponse.json({
+    ok: true,
+    users: qs.size,
+    sent: messages.length,
+    ticketCount: tickets.length,
+  });
 }

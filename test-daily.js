@@ -3,7 +3,7 @@ const API_URL = process.env.API_URL || "http://localhost:3000/api/cron/daily";
 
 async function callApi() {
   try {
-    const res = await fetch(API_URL, { method: "GET", headers: { "Accept": "application/json" } });
+    const res = await fetch(API_URL, { method: "POST", headers: { "Accept": "application/json" } });
     const text = await res.text();
     let data;
     try { data = JSON.parse(text); } catch { data = text; }

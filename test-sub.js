@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 
 const API_URL =
   process.env.API_URL ||
-  "http://localhost:3000/api/cron/subscription-expiry?daysAhead=2&windowHours=24&limitUsers=5&dryRun=true";
+  "http://localhost:3000/api/cron/subscription-expiry";
 
 async function callApi() {
   try {

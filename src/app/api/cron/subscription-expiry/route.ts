@@ -1,6 +1,7 @@
+// app/api/push/subscription-expiry/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { initFirebaseAdmin } from "@/lib/firebaseAdmin";
-import { getFirestore, Timestamp } from "firebase-admin/firestore";
+import { getFirestore } from "firebase-admin/firestore";
 import { sendExpoMessages } from "@/lib/expoPush";
 
 export const runtime = "nodejs";
@@ -10,104 +11,87 @@ const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;
 
 function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); }
 function badRequest(m = "Bad Request") { return json({ ok: false, error: m }, { status: 400 }); }
+function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
 
-export async function POST(req: NextRequest) {
+// ...imports ve sabitler aynı
+export async function GET(req: NextRequest) {
+  const signature = req.headers.get("x-vercel-cron-signature");
+  if (signature !== process.env.VERCEL_CRON_SECRET) {
+    return forbidden("Invalid or missing cron signature");
+  }
+
   initFirebaseAdmin();
   const db = getFirestore();
 
-  // ---- body (mesaj içeriği API’den gelir)
-  let body: any; try { body = await req.json(); } catch { return badRequest("Invalid JSON body"); }
+  let body: any;
+  try { body = await req.json(); } catch { return badRequest("Invalid JSON body"); }
+
   const {
     title,
     body: msgBody,
-    data,
-    sound = "default",
-    priority = "default"
   } = body || {};
   if (!title || !msgBody) return badRequest("title and body required in request");
 
-  // ---- query param’lar (testi kolaylaştırır)
-  const url = new URL(req.url);
-  const daysAhead = Number(url.searchParams.get("daysAhead") ?? 2);       // varsayılan: 2 gün sonra
-  const windowHours = Number(url.searchParams.get("windowHours") ?? 24);  // pencere: 24 saat
-  const onlyPremium = url.searchParams.get("onlyPremium") !== "false";    // varsayılan: true
-  const limitUsers = Number(url.searchParams.get("limitUsers") ?? 0);     // 0 = limitsiz
-  const dryRun = url.searchParams.get("dryRun") === "true";
+  const qs = await db.collection("users")
+    .where("revenueCat.isPremium", "==", true)
+    .get();
 
-  // ---- zaman aralığı (daysAhead başlangıcı + windowHours)
-  const now = new Date();
-  const windowStart = new Date(now.getTime() + daysAhead * 24 * 3600 * 1000);
-  const windowEnd = new Date(windowStart.getTime() + windowHours * 3600 * 1000);
+  const nowSec = Math.floor(Date.now() / 1000);
+  const messages: any[] = [];
 
-  // Firestore Timestamp’e çevir
-  const tsStart = Timestamp.fromDate(windowStart);
-  const tsEnd = Timestamp.fromDate(windowEnd);
+  let invalidCount = 0;
 
-  // ---- users sorgusu
-    let query = db
-    .collection("users")
-    .where("revenueCat.activeUntil", ">=", tsStart)
-    .where("revenueCat.activeUntil", "<=", tsEnd);
-
-    const qs = await query.get();
-    const docs = qs.docs.filter(d => d.data()?.revenueCat?.isPremium === true);
-
-  // ---- mesajları hazırla
-  const messages: {
-    to: string; sound: "default"; title: string; body: string;
-    data: any; priority: "default" | "high";
-  }[] = [];
-
-  for (const doc of docs) {
+  for (const doc of qs.docs) {
     const u = doc.data() || {};
-    const untilISO = u?.revenueCat?.activeUntil?.toDate?.()?.toISOString?.() ?? null;
+    const untilTs = u?.revenueCat?.activeUntil?._seconds;
+    if (!untilTs) continue;
 
-    // token’ları userPushTokens/{userId}’dan çek
-    const tokenDoc = await db.collection("userPushTokens").doc(doc.id).get();
-    const tokenArr = Array.isArray(tokenDoc.data()?.tokens) ? tokenDoc.data()!.tokens : [];
-    const tokens: string[] = tokenArr.map((t: any) => t?.token).filter(Boolean);
+    const diffDays = Math.floor((untilTs - nowSec) / 86400); // saniyeden gün farkı
+    if (diffDays > 7 || diffDays < 0) continue; // yalnızca 1 hafta içindekiler
 
-    for (const to of tokens) {
-      if (!EXPO_TOKEN_RE.test(to)) continue; // Expo token formatı
+    // sadece 7, 4 ve 1 gün kala gönder
+    if (![7, 4, 1].includes(diffDays)) continue;
+
+    // mesaj metni duruma göre değişiyor
+    let msgBodyDynamic = "";
+    if (diffDays === 7) msgBodyDynamic = "Your subscription expires in 1 week ⏳";
+    else if (diffDays === 4) msgBodyDynamic = "Your subscription will expire in 4 days 🔔";
+    else if (diffDays === 1) msgBodyDynamic = "Your subscription ends tomorrow ⚠️";
+
+    // tokenları al
+    const tokenSnap = await db.collection("userPushTokens").doc(doc.id).get();
+    const tokenArr = Array.isArray(tokenSnap.data()?.tokens) ? tokenSnap.data()!.tokens : [];
+    const tokens = tokenArr.map((t: any) => t?.token).filter(Boolean);
+
+    const validTokens = tokens.filter((t: string) => EXPO_TOKEN_RE.test(t));
+    for (const to of validTokens) {
       messages.push({
         to,
         sound: "default",
-        title,
-        body: msgBody,
-        data: { ...data, type: "subscription_expiry", subscriptionEnd: untilISO },
-        priority: (priority === "high" ? "high" : "default"),
+        title: "Subscription Expiry Reminder",
+        body: msgBodyDynamic,
+        data: { type: "subscription_expiry", daysLeft: diffDays },
+        priority: "high",
       });
     }
   }
 
   if (messages.length === 0) {
-    return json({
+    return NextResponse.json({
       ok: false,
       matchedUsers: qs.size,
-      selectedUsers: docs.length,
-      preview: dryRun ? "no messages to send" : undefined
+      sent: 0,
+      invalidCount,
     }, { status: 404 });
   }
 
-  // ---- dryRun: gönderme, sadece önizleme
-  if (dryRun) {
-    return json({
-      ok: true,
-      matchedUsers: qs.size,
-      selectedUsers: docs.length,
-      previewCount: messages.length,
-      sample: messages.slice(0, 3)
-    });
-  }
-
-  // ---- gönderim
   const tickets = await sendExpoMessages(messages);
-  return json({
+  return NextResponse.json({
     ok: true,
     matchedUsers: qs.size,
-    selectedUsers: docs.length,
-    sentMessages: messages.length,
+    sent: messages.length,
+    invalidCount,
     ticketCount: tickets.length,
-    window: { start: windowStart.toISOString(), end: windowEnd.toISOString() }
   });
 }
+

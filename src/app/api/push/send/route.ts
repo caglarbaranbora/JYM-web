@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initFirebaseAdmin } from "@/lib/firebaseAdmin";
-import { getFirestore, FieldValue } from "firebase-admin/firestore";
+import { getFirestore } from "firebase-admin/firestore";
 import { sendExpoMessages } from "@/lib/expoPush";
 
 export const runtime = "nodejs";
@@ -10,27 +10,14 @@ function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); 
 function badRequest(m = "Bad Request") { return json({ ok: false, error: m }, { status: 400 }); }
 function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
 
-// Basit sunucu anahtarı (önerilir)
-const REQ_KEY_HEADER = "x-server-key";
-const SERVER_KEY = process.env.SERVER_PUSH_KEY;
-
 // Sadece Expo token doğrulaması yapmak istiyorsan açık bırak:
 const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;
 
 export async function POST(req: NextRequest) {
-    // Güvenlik: sunucu anahtarı
-    if (SERVER_KEY) {
-        const k = req.headers.get(REQ_KEY_HEADER);
-        if (k !== SERVER_KEY) return forbidden("Invalid or missing server key");
-    }
-
     let body: any;
     try { body = await req.json(); }
     catch { return badRequest("Invalid JSON body"); }
 
-    // Kullanım:
-    // 1) { toUserId, title, body, data? }
-    // 2) { toUserIds: string[], title, body, data? }
     const { toUserId, toUserIds, title, body: msgBody, data, priority = "default" } = body || {};
     if ((!toUserId && !Array.isArray(toUserIds)) || !title || !msgBody) {
         return badRequest("toUserId OR toUserIds, and title, body are required");
@@ -75,17 +62,7 @@ export async function POST(req: NextRequest) {
         priority: (priority === "high" ? "high" : "default") as "default" | "high",
     }));
 
-    // Gönder + ticket logla
+    // Gönder
     const ticketIds = await sendExpoMessages(messages);
-
-    if (ticketIds.length) {
-        await db.collection("pushTickets").add({
-            createdAt: FieldValue.serverTimestamp(),
-            targetUserIds: targetIds,
-            tickets: ticketIds,
-            meta: { title, dataType: data?.type ?? null }
-        });
-    }
-
     return json({ ok: true, sent: tokens.length, ticketCount: ticketIds.length });
 }

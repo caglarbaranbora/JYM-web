@@ -1,5 +1,5 @@
 // app/api/push/daily/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { initFirebaseAdmin } from "@/lib/firebaseAdmin";
 import { getFirestore } from "firebase-admin/firestore";
 import { sendExpoMessages } from "@/lib/expoPush";
@@ -7,21 +7,20 @@ import { sendExpoMessages } from "@/lib/expoPush";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const REQ_KEY_HEADER = "x-server-key";
-const SERVER_KEY = process.env.SERVER_PUSH_KEY;
 const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;
 
-export async function POST() {
-  // (opsiyonel) basit sunucu anahtarı koruması
-  //   if (SERVER_KEY) {
-  //     const k = req.headers.get(REQ_KEY_HEADER);
-  //     if (k !== SERVER_KEY) return forbidden("Invalid or missing server key");
-  //   }
+function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); }
+function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
+
+export async function GET(req: NextRequest) {
+  const signature = req.headers.get("x-vercel-cron-signature");
+  if (signature !== process.env.VERCEL_CRON_SECRET) {
+    return forbidden("Invalid or missing cron signature");
+  }
 
   initFirebaseAdmin();
   const db = getFirestore();
 
-  // userPushTokens koleksiyonundan tüm kullanıcı tokenlarını çek
   const qs = await db.collection("userPushTokens").get();
 
   const messages: { to: string; sound: "default"; title: string; body: string; data: any }[] = [];
@@ -30,12 +29,13 @@ export async function POST() {
     const tokensArr = Array.isArray(data.tokens) ? data.tokens : [];
     for (const t of tokensArr) {
       const tok = t?.token;
+      console.log(tok);
       if (!tok || !EXPO_TOKEN_RE.test(tok)) continue; // sadece geçerli Expo token
       messages.push({
         to: tok,
         sound: "default",
-        title: "Günün hatırlatması",
-        body: "Bugünkü hedefini tamamladın mı?",
+        title: "Daily Reminder",
+        body: "Did you complete your daily task today?",
         data: { type: "daily" },
       });
     }

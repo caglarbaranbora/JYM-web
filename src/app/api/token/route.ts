@@ -66,9 +66,25 @@ function isHttps(req: NextRequest) {
 
 function checkOrigin(req: NextRequest) {
   if (ALLOWED_ORIGINS.length === 0) return { ok: true };
-  const origin = req.headers.get("origin") || "";
-  if (!origin) return { ok: ALLOW_NO_ORIGIN, reason: "no-origin" };
-  return { ok: ALLOWED_ORIGINS.includes(origin), origin };
+
+  const origin = req.headers.get("origin");
+  const isMobile = req.headers.get("x-mobile-app");
+
+  // Mobil uygulama için özel kontrol
+  if (isMobile && ALLOW_NO_ORIGIN) {
+    return { ok: true, origin: null }; // Mobil için origin kontrolü yapma
+  }
+
+  // Web için origin kontrolü
+  if (!origin) {
+    return { ok: ALLOW_NO_ORIGIN, origin: null };
+  }
+
+  if (!ALLOWED_ORIGINS.includes(origin)) {
+    return { ok: false, origin };
+  }
+
+  return { ok: true, origin };
 }
 
 function pickWhitelistedEnv() {

@@ -82,7 +82,7 @@ export default function Footer() {
             <div className="space-y-3 sm:space-y-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 md:gap-8">
                 <a
-                  href="https://apps.apple.com"
+                  href="https://apps.apple.com/tr/app/jym-fitness/id6753074763?l=tr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block"

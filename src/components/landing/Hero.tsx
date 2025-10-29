@@ -18,34 +18,10 @@ export default function Hero({
 }: HeroProps) {
   const [line1, line2] = leftTitle.split("\n");
   const router = useRouter();
-  useEffect(() => {
-    // Unicorn Studio script'ini yükle
-    if (!(window as any).UnicornStudio) {
-      (window as any).UnicornStudio = { isInitialized: false };
-      const script = document.createElement("script");
-      script.src =
-        "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js";
-      script.onload = () => {
-        if (!(window as any).UnicornStudio.isInitialized) {
-          (window as any).UnicornStudio.init();
-          (window as any).UnicornStudio.isInitialized = true;
-        }
-      };
-      (document.head || document.body).appendChild(script);
-    }
-  }, []);
 
   return (
     <div className="p-4 sm:p-6 md:p-8 mb-4 -mt-5 relative overflow-hidden rounded-[80px]">
       {/* Unicorn Studio Background */}
-      <div
-        data-us-project="ckPkXW5cS3j2qCxJYYJ5"
-        className="absolute inset-0 w-full h-full z-0"
-        style={{
-          borderRadius: "inherit",
-          pointerEvents: "none",
-        }}
-      />
 
       {/* Content overlay */}
       <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center">
@@ -72,7 +48,11 @@ export default function Hero({
               />
             </button>
             <button
-              onClick={() => router.push("/")}
+              onClick={() =>
+                router.push(
+                  "https://apps.apple.com/tr/app/jym-fitness/id6753074763?l=tr"
+                )
+              }
               className="cursor-pointer transition-transform hover:scale-105"
             >
               <Image

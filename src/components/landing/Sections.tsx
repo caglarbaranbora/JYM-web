@@ -1,19 +1,44 @@
-"use client"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
-import MultiImageSlider from "@/components/ui/MultiImageSlider"
+"use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import MultiImageSlider from "@/components/ui/MultiImageSlider";
 
 export default function GetYourFit() {
-  const router = useRouter()
+  const router = useRouter();
 
   const sliderImages = [
-    { src: "/images/1.png", alt: "Get Your Fit - Screen 1", width: 400, height: 800 },
-    { src: "/images/2.png", alt: "Get Your Fit - Screen 2", width: 370, height: 800 },
-    { src: "/images/8.png", alt: "Get Your Fit - Screen 3", width: 340, height: 800 },
-    { src: "/images/6.png", alt: "Get Your Fit - Screen 4", width: 310, height: 800 },
-    { src: "/images/7.png", alt: "Get Your Fit - Screen 5", width: 280, height: 800 },
-  ]
+    {
+      src: "/images/1.png",
+      alt: "Get Your Fit - Screen 1",
+      width: 400,
+      height: 800,
+    },
+    {
+      src: "/images/2.png",
+      alt: "Get Your Fit - Screen 2",
+      width: 370,
+      height: 800,
+    },
+    {
+      src: "/images/8.png",
+      alt: "Get Your Fit - Screen 3",
+      width: 340,
+      height: 800,
+    },
+    {
+      src: "/images/6.png",
+      alt: "Get Your Fit - Screen 4",
+      width: 310,
+      height: 800,
+    },
+    {
+      src: "/images/7.png",
+      alt: "Get Your Fit - Screen 5",
+      width: 280,
+      height: 800,
+    },
+  ];
 
   return (
     <div className="mb-4 p-4 sm:p-6 md:p-8">
@@ -57,7 +82,11 @@ export default function GetYourFit() {
           <motion.button
             whileHover={{ scale: 1.1, rotate: 2 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/")}
+            onClick={() =>
+              router.push(
+                "https://apps.apple.com/tr/app/jym-fitness/id6753074763?l=tr"
+              )
+            }
             className="cursor-pointer"
           >
             <Image
@@ -78,9 +107,13 @@ export default function GetYourFit() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <MultiImageSlider images={sliderImages} autoPlayInterval={5000} className="mb-8" />
+          <MultiImageSlider
+            images={sliderImages}
+            autoPlayInterval={5000}
+            className="mb-8"
+          />
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

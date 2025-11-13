@@ -9,9 +9,15 @@ export const dynamic = "force-dynamic";
 
 const EXPO_TOKEN_RE = /^ExponentPushToken\[[\w-]+\]$/;
 
-function json(d: any, init?: ResponseInit) { return NextResponse.json(d, init); }
-function badRequest(m = "Bad Request") { return json({ ok: false, error: m }, { status: 400 }); }
-function forbidden(m = "Forbidden") { return json({ ok: false, error: m }, { status: 403 }); }
+function json(d: any, init?: ResponseInit) {
+  return NextResponse.json(d, init);
+}
+function badRequest(m = "Bad Request") {
+  return json({ ok: false, error: m }, { status: 400 });
+}
+function forbidden(m = "Forbidden") {
+  return json({ ok: false, error: m }, { status: 403 });
+}
 
 // ...imports ve sabitler aynı
 export async function GET(req: NextRequest) {
@@ -24,15 +30,18 @@ export async function GET(req: NextRequest) {
   const db = getFirestore();
 
   let body: any;
-  try { body = await req.json(); } catch { return badRequest("Invalid JSON body"); }
+  try {
+    body = await req.json();
+  } catch {
+    return badRequest("Invalid JSON body");
+  }
 
-  const {
-    title,
-    body: msgBody,
-  } = body || {};
-  if (!title || !msgBody) return badRequest("title and body required in request");
+  const { title, body: msgBody } = body || {};
+  if (!title || !msgBody)
+    return badRequest("title and body required in request");
 
-  const qs = await db.collection("users")
+  const qs = await db
+    .collection("users")
     .where("revenueCat.isPremium", "==", true)
     .get();
 
@@ -54,13 +63,18 @@ export async function GET(req: NextRequest) {
 
     // mesaj metni duruma göre değişiyor
     let msgBodyDynamic = "";
-    if (diffDays === 7) msgBodyDynamic = "Your subscription expires in 1 week ⏳";
-    else if (diffDays === 4) msgBodyDynamic = "Your subscription will expire in 4 days 🔔";
-    else if (diffDays === 1) msgBodyDynamic = "Your subscription ends tomorrow ⚠️";
+    if (diffDays === 7)
+      msgBodyDynamic = "Your subscription expires in 1 week ⏳";
+    else if (diffDays === 4)
+      msgBodyDynamic = "Your subscription will expire in 4 days 🔔";
+    else if (diffDays === 1)
+      msgBodyDynamic = "Your subscription ends tomorrow ⚠️";
 
     // tokenları al
     const tokenSnap = await db.collection("userPushTokens").doc(doc.id).get();
-    const tokenArr = Array.isArray(tokenSnap.data()?.tokens) ? tokenSnap.data()!.tokens : [];
+    const tokenArr = Array.isArray(tokenSnap.data()?.tokens)
+      ? tokenSnap.data()!.tokens
+      : [];
     const tokens = tokenArr.map((t: any) => t?.token).filter(Boolean);
 
     const validTokens = tokens.filter((t: string) => EXPO_TOKEN_RE.test(t));
@@ -77,12 +91,15 @@ export async function GET(req: NextRequest) {
   }
 
   if (messages.length === 0) {
-    return NextResponse.json({
-      ok: false,
-      matchedUsers: qs.size,
-      sent: 0,
-      invalidCount,
-    }, { status: 404 });
+    return NextResponse.json(
+      {
+        ok: false,
+        matchedUsers: qs.size,
+        sent: 0,
+        invalidCount,
+      },
+      { status: 404 }
+    );
   }
 
   const tickets = await sendExpoMessages(messages);
@@ -94,4 +111,3 @@ export async function GET(req: NextRequest) {
     ticketCount: tickets.length,
   });
 }
-

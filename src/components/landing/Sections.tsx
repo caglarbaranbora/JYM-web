@@ -68,7 +68,9 @@ export default function GetYourFit() {
           <motion.button
             whileHover={{ scale: 1.1, rotate: -2 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/")}
+            onClick={() =>
+              router.push("https://groups.google.com/g/jym-fitness-test")
+            }
             className="cursor-pointer"
           >
             <Image

@@ -81,7 +81,7 @@ export default function Footer() {
             </h3>
             <div className="space-y-3 sm:space-y-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 md:gap-8">
-                <a
+                <Link
                   href="https://apps.apple.com/tr/app/jym-fitness/id6753074763?l=tr"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -94,9 +94,9 @@ export default function Footer() {
                     height={40}
                     className="w-32 sm:w-36 md:w-40 lg:w-[150px] h-auto"
                   />
-                </a>
-                <a
-                  href="https://play.google.com"
+                </Link>
+                <Link
+                  href="https://groups.google.com/g/jym-fitness-test"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block"
@@ -108,7 +108,7 @@ export default function Footer() {
                     height={40}
                     className="w-32 sm:w-36 md:w-40 lg:w-[150px] h-auto"
                   />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

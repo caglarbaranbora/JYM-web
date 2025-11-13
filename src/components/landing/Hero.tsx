@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type HeroProps = {
   leftTitle?: string;
@@ -35,9 +36,10 @@ export default function Hero({
           </h1>
           {/* App Store Buttons - Responsive */}
           <div className="flex items-center justify-start gap-2 sm:gap-3 md:gap-4">
-            <button
-              onClick={() => router.push("/")}
+            <Link
+              href={"https://groups.google.com/g/jym-fitness-test"}
               className="cursor-pointer transition-transform hover:scale-105"
+              target="blank"
             >
               <Image
                 src={"/icons/googleplay.png"}
@@ -46,14 +48,13 @@ export default function Hero({
                 height={0}
                 className="w-24 sm:w-32 md:w-40 lg:w-48 xl:w-[200px] h-auto bg-black p-2 rounded-lg"
               />
-            </button>
-            <button
-              onClick={() =>
-                router.push(
-                  "https://apps.apple.com/tr/app/jym-fitness/id6753074763?l=tr"
-                )
+            </Link>
+            <Link
+              href={
+                "https://apps.apple.com/tr/app/jym-fitness/id6753074763?l=tr"
               }
               className="cursor-pointer transition-transform hover:scale-105"
+              target="blank"
             >
               <Image
                 src={"/icons/apple.png"}
@@ -62,7 +63,7 @@ export default function Hero({
                 height={0}
                 className="w-24 sm:w-32 md:w-40 lg:w-48 xl:w-[200px] h-auto"
               />
-            </button>
+            </Link>
           </div>
         </div>
 

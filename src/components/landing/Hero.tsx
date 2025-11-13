@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 type HeroProps = {
@@ -18,7 +17,6 @@ export default function Hero({
   thirdMockupSrc = "/images/9.png",
 }: HeroProps) {
   const [line1, line2] = leftTitle.split("\n");
-  const router = useRouter();
 
   return (
     <div className="p-4 sm:p-6 md:p-8 mb-4 -mt-5 relative overflow-hidden rounded-[80px]">

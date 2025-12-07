@@ -44,7 +44,6 @@ export async function GET(req: NextRequest) {
     const tokensArr = Array.isArray(data.tokens) ? data.tokens : [];
     for (const t of tokensArr) {
       const tok = t?.token;
-      console.log(tok);
       if (!tok || !EXPO_TOKEN_RE.test(tok)) continue; // sadece geçerli Expo token
       messages.push({
         to: tok,

@@ -31,17 +31,6 @@ export async function GET(req: NextRequest) {
   initFirebaseAdmin();
   const db = getFirestore();
 
-  let body: any;
-  try {
-    body = await req.json();
-  } catch {
-    return badRequest("Invalid JSON body");
-  }
-
-  const { title, body: msgBody } = body || {};
-  if (!title || !msgBody)
-    return badRequest("title and body required in request");
-
   const qs = await db
     .collection("users")
     .where("revenueCat.isPremium", "==", true)

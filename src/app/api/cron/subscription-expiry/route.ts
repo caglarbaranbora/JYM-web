@@ -1,4 +1,3 @@
-// app/api/push/subscription-expiry/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { initFirebaseAdmin } from "@/lib/firebaseAdmin";
 import { getFirestore } from "firebase-admin/firestore";
@@ -18,39 +17,39 @@ interface Entitlement {
 }
 
 export async function GET(req: NextRequest) {
-  // Allow only Vercel Cron
   const ua = req.headers.get("user-agent") || "";
-  if (!ua.includes("vercel-cron")) {
+  const isCron = ua.includes("vercel-cron");
+
+  if (!isCron) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   initFirebaseAdmin();
   const db = getFirestore();
 
-  // New collection name
-  const qs = await db.collection("customers").get();
+  const customersSnap = await db.collection("customers").get();
 
   const nowSec = Math.floor(Date.now() / 1000);
   const messages: any[] = [];
 
-  for (const doc of qs.docs) {
-    const u = doc.data() || {};
-    const entitlements = (u.entitlements || {}) as Record<string, Entitlement>;
+  for (const doc of customersSnap.docs) {
+    const customer = doc.data() || {};
 
-    // 1) Active entitlement bul
+    const entitlements = (customer.entitlements || {}) as Record<
+      string,
+      Entitlement
+    >;
+
     const activeEnt = Object.values(entitlements).find(
       (ent) => ent?.isActive === true
     );
-    if (!activeEnt) continue;
+    if (!activeEnt || !activeEnt.expiresDate) continue;
 
-    if (!activeEnt.expiresDate) continue;
-
-    const expiresIso = activeEnt.expiresDate;
-    const expiresSec = Math.floor(new Date(expiresIso).getTime() / 1000);
+    const expiresSec = Math.floor(
+      new Date(activeEnt.expiresDate).getTime() / 1000
+    );
 
     const diffDays = Math.floor((expiresSec - nowSec) / 86400);
-
-    // Only notify at 7, 4, 1 days remaining
     if (![7, 4, 1].includes(diffDays)) continue;
 
     let msgBody = "";
@@ -58,15 +57,21 @@ export async function GET(req: NextRequest) {
     if (diffDays === 4) msgBody = "Your subscription will expire in 4 days 🔔";
     if (diffDays === 1) msgBody = "Your subscription ends tomorrow ⚠️";
 
-    // 3) Push tokenları çek
     const tokenSnap = await db.collection("userPushTokens").doc(doc.id).get();
+    if (!tokenSnap.exists) continue;
+
     const tokenArr = tokenSnap.data()?.tokens || [];
 
-    const validTokens = tokenArr
-      .map((t: any) => t?.token)
-      .filter((t: any) => EXPO_TOKEN_RE.test(t));
+    const activeTokens = tokenArr
+      .filter((t: any) => t?.isActive === true && t?.token)
+      .map((t: any) => t.token)
+      .filter((tok: string) => EXPO_TOKEN_RE.test(tok));
 
-    for (const tok of validTokens) {
+    const uniqueActiveTokens = Array.from(new Set(activeTokens));
+
+    if (uniqueActiveTokens.length === 0) continue;
+
+    for (const tok of uniqueActiveTokens) {
       messages.push({
         to: tok,
         sound: "default",
@@ -76,23 +81,19 @@ export async function GET(req: NextRequest) {
           type: "subscription_expiry",
           daysLeft: diffDays,
         },
-        priority: "high",
       });
     }
   }
 
   if (messages.length === 0) {
     return NextResponse.json(
-      {
-        ok: true,
-        sent: 0,
-        message: "No users match the expiry criteria",
-      },
+      { ok: true, sent: 0, message: "No matching users" },
       { status: 200 }
     );
   }
 
   const tickets = await sendExpoMessages(messages);
+
   return NextResponse.json({
     ok: true,
     sent: messages.length,

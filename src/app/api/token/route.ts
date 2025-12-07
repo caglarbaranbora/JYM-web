@@ -119,13 +119,11 @@ export async function GET(req: NextRequest) {
         console.error("CLERK_SECRET_KEY not found");
         return unauthorized("Server configuration error");
       }
-      console.log("Token received:", bearer.substring(0, 30) + "...");
-      console.log("CLERK_SECRET_KEY exists:", !!process.env.CLERK_SECRET_KEY);
+
       // Token'ı doğrula
       const payload = await verifyToken(bearer, {
         secretKey: process.env.CLERK_SECRET_KEY,
       });
-      console.log("Token verified successfully:", payload.sub);
 
       userId = payload.sub ?? null;
 

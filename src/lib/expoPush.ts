@@ -46,7 +46,6 @@ export async function sendExpoMessages(messages: ExpoMessage[]) {
   for (const p of parts) {
     const payload = p.length === 1 ? p[0] : p;
     const json = await postJson(EXPO_URL, payload);
-    console.log("Expo raw response:", JSON.stringify(json, null, 2)); // 🔥 ekledik
 
     const tickets = Array.isArray(json?.data)
       ? json.data

@@ -35,7 +35,9 @@ function verifyCronSignature(signature: string | null) {
 // ...imports ve sabitler aynı
 export async function GET(req: NextRequest) {
   const signature = req.headers.get("x-vercel-cron-signature");
-  console.log("Env Secret:", process.env.VERCEL_CRON_SECRET);
+  console.log("Request: ", req);
+  console.log("Header: ", req.headers);
+  console.log("------");
   console.log("Received Signature:", signature);
 
   if (!verifyCronSignature(signature)) {

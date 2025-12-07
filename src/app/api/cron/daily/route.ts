@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { initFirebaseAdmin } from "@/lib/firebaseAdmin";
 import { getFirestore } from "firebase-admin/firestore";
 import { sendExpoMessages } from "@/lib/expoPush";
-import crypto from "crypto";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,22 +19,12 @@ function forbidden(m = "Forbidden") {
   return json({ ok: false, error: m }, { status: 403 });
 }
 
-function verifyCronSignature(signature: string | null) {
-  const secret = process.env.VERCEL_CRON_SECRET;
-  if (!secret || !signature) return false;
-
-  const expected = crypto
-    .createHmac("sha256", secret)
-    .update("") // GET isteklerinde body boş
-    .digest("hex");
-
-  return signature === expected;
-}
-
 export async function GET(req: NextRequest) {
-  const signature = req.headers.get("x-vercel-cron-signature");
-  if (!verifyCronSignature(signature)) {
-    return forbidden("Invalid or missing cron signature");
+  const ua = req.headers.get("user-agent") || "";
+  const isCron = ua.includes("vercel-cron");
+
+  if (!isCron) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   initFirebaseAdmin();

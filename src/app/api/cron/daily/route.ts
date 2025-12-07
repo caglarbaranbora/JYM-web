@@ -34,7 +34,6 @@ function verifyCronSignature(signature: string | null) {
 
 export async function GET(req: NextRequest) {
   const signature = req.headers.get("x-vercel-cron-signature");
-  console.log("printing signature:", signature);
   if (!verifyCronSignature(signature)) {
     return forbidden("Invalid or missing cron signature");
   }

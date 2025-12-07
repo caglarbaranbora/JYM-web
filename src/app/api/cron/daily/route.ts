@@ -45,9 +45,9 @@ export async function GET(req: NextRequest) {
   const ua = req.headers.get("user-agent") || "";
   const isCron = ua.includes("vercel-cron");
 
-  // if (!isCron) {
-  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // }
+  if (!isCron) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   initFirebaseAdmin();
   const db = getFirestore();
